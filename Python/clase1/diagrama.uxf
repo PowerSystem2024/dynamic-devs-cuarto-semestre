@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<umlet_diagram>
+<zoom_level>10</zoom_level>
+
+<element>
+<id>UMLClass</id>
+<coordinates>
+<x>100</x><y>50</y><w>200</w><h>260</h>
+</coordinates>
+<panel_attributes>Conexion
+--
+-DATABASE: String
+-USERNAME: String
+-PASSWORD: String
+-DB_PORT: String
+-HOST: String
+-MIN_CON: int
+-MAX_CON: int
+-pool: Pool
+--
++obtenerPool(cls): Pool
++obtenerConexion(cls): Connection
++liberarConexion(cls, conexion)
++cerrarConexiones(cls)
+</panel_attributes>
+<additional_attributes/>
+</element>
+
+<element>
+<id>UMLClass</id>
+<coordinates>
+<x>100</x><y>350</y><w>200</w><h>140</h>
+</coordinates>
+<panel_attributes>CursorDelPool
+--
+-conn: String
+-cursor: String
+--
++__init__(self)
++__enter__(self)
++__exit__(self)
+</panel_attributes>
+<additional_attributes/>
+</element>
+
+<element>
+<id>UMLClass</id>
+<coordinates>
+<x>400</x><y>50</y><w>200</w><h>120</h>
+</coordinates>
+<panel_attributes>Usuario
+--
+-id_usuario: int
+-username: String
+-password: String
+--
++__str__(): String
++metodo Get/Set de cada atributo
+</panel_attributes>
+<additional_attributes/>
+</element>
+
+<element>
+<id>UMLClass</id>
+<coordinates>
+<x>400</x><y>200</y><w>200</w><h>160</h>
+</coordinates>
+<panel_attributes>UsuarioDao
+--
+-SELECCIONAR: String
+-INSERTAR: String
+-ACTUALIZAR: String
+-ELIMINAR: String
+--
++seleccionar(cls): List&lt;Usuario&gt;
++insertar(cls, usuario)
++actualizar(cls, usuario)
++eliminar(cls, usuario)
+</panel_attributes>
+<additional_attributes/>
+</element>
+
+<element>
+<id>UMLClass</id>
+<coordinates>
+<x>700</x><y>50</y><w>200</w><h>120</h>
+</coordinates>
+<panel_attributes>MenuAppUsuario
+--
+Responsabilidades:
+- Contiene un menú con 5 opciones:
+  1) Listar usuarios
+  2) Agregar usuario
+  3) Actualizar usuario
+  4) Eliminar usuario
+  5) Salir
+</panel_attributes>
+<additional_attributes/>
+</element>
+
+<element>
+<id>UMLClass</id>
+<coordinates>
+<x>700</x><y>200</y><w>200</w><h>80</h>
+</coordinates>
+<panel_attributes>logger_base
+--
++logger: logging
+Responsabilidades:
+- Configuración de logging para toda la aplicación
+</panel_attributes>
+<additional_attributes/>
+</element>
+
+<!-- Relaciones -->
+<element>
+<id>Relation</id>
+<coordinates>
+<x>200</x><y>300</y><w>60</w><h>60</h>
+</coordinates>
+<panel_attributes>lt=&lt;*&gt;</panel_attributes>
+<additional_attributes>100;260;100;350</additional_attributes>
+</element>
+
+<element>
+<id>Relation</id>
+<coordinates>
+<x>300</x><y>200</y><w>60</w><h>60</h>
+</coordinates>
+<panel_attributes>lt=.</panel_attributes>
+<additional_attributes>400;260;400;200</additional_attributes>
+</element>
+
+</umlet_diagram>
