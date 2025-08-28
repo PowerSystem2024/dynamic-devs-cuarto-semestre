@@ -29,10 +29,20 @@ const elements = {
         document.getElementById("btn-patada"),
         document.getElementById("btn-barrida")
     ],
-    textosAtaque: document.querySelectorAll("section#seleccionar-ataque p")
+    textosAtaque: document.querySelectorAll("section#seleccionar-ataque p"),
+    seccionSeleccion: document.getElementById("selecionar-personaje"),
+    seccionAtaque: document.getElementById("seleccionar-ataque"),
+    seccionReiniciar: document.getElementById("reiniciar")
 };
 
-//  Seleccionar personaje del jugador
+// 🔥 Ocultar todas las secciones excepto selección al inicio
+function ocultarSecciones() {
+    elements.seccionSeleccion.style.display = "block";
+    elements.seccionAtaque.style.display = "none";
+    elements.seccionReiniciar.style.display = "none";
+}
+
+// 🎯 Seleccionar personaje del jugador
 function seleccionarPersonajeJugador() {
     const seleccion = PERSONAJES.find(nombre =>
         document.getElementById(nombre.split(" ")[0]).checked
@@ -43,12 +53,16 @@ function seleccionarPersonajeJugador() {
         mostrarMensaje(`Seleccionaste a ${gameState.personajeJugador}`);
         elements.personajeJugador.innerText = gameState.personajeJugador;
         seleccionarPersonajePC();
+
+        // 🔥 Cambiar a pantalla de ataque
+        elements.seccionSeleccion.style.display = "none";
+        elements.seccionAtaque.style.display = "block";
     } else {
         mostrarMensaje("No seleccionaste ningún personaje");
     }
 }
 
-// 🤖 Seleccionar personaje de la PC (distinto al jugador)
+// 🤖 Seleccionar personaje de la PC
 function seleccionarPersonajePC() {
     const opcionesPC = PERSONAJES.filter(p => p !== gameState.personajeJugador);
     gameState.personajePC = opcionesPC[Math.floor(Math.random() * opcionesPC.length)];
@@ -88,7 +102,7 @@ function combate(ataqueJugador, ataquePC) {
     verificarFinJuego();
 }
 
-// ❤️ Actualizar vidas en pantalla
+// ❤️ Actualizar vidas
 function actualizarVidas() {
     elements.textosAtaque[0].innerHTML =
         `Tu personaje (<span>${gameState.personajeJugador}</span>) tiene <span>${gameState.vidasJugador}</span> vidas`;
@@ -96,15 +110,22 @@ function actualizarVidas() {
         `El personaje enemigo (<span>${gameState.personajePC}</span>) tiene <span>${gameState.vidasPC}</span> vidas`;
 }
 
-// 🛑 Verificar si terminó el juego
+// 🛑 Verificar fin de juego
 function verificarFinJuego() {
     if (gameState.vidasJugador === 0) {
         mostrarMensaje("¡Perdiste el juego!");
-        deshabilitarBotones();
+        finalizarJuego();
     } else if (gameState.vidasPC === 0) {
         mostrarMensaje("¡Ganaste el juego!");
-        deshabilitarBotones();
+        finalizarJuego();
     }
+}
+
+// 🔒 Finalizar juego
+function finalizarJuego() {
+    deshabilitarBotones();
+    elements.seccionAtaque.style.display = "none";
+    elements.seccionReiniciar.style.display = "block";
 }
 
 // 🚫 Deshabilitar botones de ataque
@@ -112,18 +133,19 @@ function deshabilitarBotones() {
     elements.botonesAtaque.forEach(boton => boton.disabled = true);
 }
 
-// 🔄 Reiniciar el juego
+// 🔄 Reiniciar juego
 function reiniciarJuego() {
     location.reload();
 }
 
-// 💬 Mostrar mensajes (fácil de mejorar con UI en vez de alert)
+// 💬 Mostrar mensajes (ahora alert, fácil de mejorar con UI)
 function mostrarMensaje(mensaje) {
     alert(mensaje);
 }
 
 // 🎮 Inicialización de eventos
 function inicializarEventos() {
+    ocultarSecciones();
     elements.botonSeleccionar.addEventListener("click", seleccionarPersonajeJugador);
     elements.botonReiniciar.addEventListener("click", reiniciarJuego);
 

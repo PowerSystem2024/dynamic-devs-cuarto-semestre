@@ -9,37 +9,32 @@
     <title>LA LEYENDA DE AANG: AVATAR</title>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&family=Zen+Dots&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/style.css">
+    <style>
+        /* 🔥 Ocultamos secciones por defecto */
+        #seleccionar-ataque, #reiniciar {
+            display: none;
+        }
+    </style>
 </head>
 <body>
 
     <h1>AVATAR 🔥 💧 🌱 💨 </h1>
 
-
-    <section >
+    <section id="reglas">
         <h2>Reglas del Juego</h2>
-
         <p class="fsr">Elige un personaje y un ataque para enfrentarte a los enemigos.</p>
         <p class="fsr">Cada personaje tiene 3 vidas. Elige sabiamente tus ataques.</p>
         <p class="fsr">Gana el combate reduciendo las vidas del enemigo a 0.</p>
         <p class="fsr">Si pierdes, puedes reiniciar el juego.</p>
         <p class="fsr">Cada ataque tiene un efecto diferente:</p>
-        <p class="fsr">
-            <strong>Puño 👊🏼:</strong> Ataque rápido y directo. Le gana a <i>Barrida👣</i>
-        </p>
-        <p class="fsr"><strong>Patada 🦶🏼:</strong> Ataque con mayor alcance. Le gana a <i>Puño 👊🏼</i> </p>
-        <p class="fsr">
-            <strong>Barrida 👣:</strong> Ataque eficaz. Le gana a <i>Patada 🦶🏼</i>
-        </p>
-
+        <p class="fsr"><strong>Puño 👊🏼:</strong> Le gana a <i>Barrida 👣</i></p>
+        <p class="fsr"><strong>Patada 🦶🏼:</strong> Le gana a <i>Puño 👊🏼</i></p>
+        <p class="fsr"><strong>Barrida 👣:</strong> Le gana a <i>Patada 🦶🏼</i></p>
         <p class="fsr">¡Diviértete y demuestra tu habilidad como Avatar!</p>
-
     </section>
-
-
 
     <section id="selecionar-personaje">
         <h2>Selecciona tu personaje</h2>
-
         <label for="Zuko" class="fss">Zuko 🔥</label>
         <input type="radio" name="personaje" id="Zuko"/>
 
@@ -57,9 +52,8 @@
 
     <section id="seleccionar-ataque">
         <h2>Elige tu ataque</h2>
-
         <p class="fsr">Tu personaje (<span id="personaje-jugador"></span>) tiene <span>3</span> vidas</p>
-        <p class="fsr">Los personajes del enemigo (<span id="personaje-pc"></span>) tienen <span>3</span> vidas</p>
+        <p class="fsr">El enemigo (<span id="personaje-pc"></span>) tiene <span>3</span> vidas</p>
 
         <p class="margen">
             <button class="boton-fuego boton-border fsr" id="btn-punio">Puño 👊🏼</button>
