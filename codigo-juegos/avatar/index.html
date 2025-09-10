@@ -7,12 +7,57 @@
     <meta name="description" content="Juego de Avatar: La leyenda de Aang">
     <meta name="keywords" content="Avatar, Aang, Katara, Zuko, Toph, Juego, HTML, CSS, JavaScript">
     <title>LA LEYENDA DE AANG: AVATAR</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&family=Zen+Dots&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./css/style.css">
     <style>
         /* 🔥 Ocultamos secciones por defecto */
-        #seleccionar-ataque, #reiniciar {
+        #seleccionar-ataque, #reiniciar, #agregar-personaje {
             display: none;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f0f8ff;
+        }
+        
+        section {
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        h1, h2 {
+            color: #2c3e50;
+        }
+        
+        button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+            font-weight: bold;
+        }
+        
+        .boton-principal {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        .boton-agregar {
+            background-color: #2ecc71;
+            color: white;
+        }
+        
+        input[type="text"], input[type="radio"] {
+            margin: 5px;
+        }
+        
+        label {
+            margin-right: 15px;
         }
     </style>
 </head>
@@ -22,49 +67,47 @@
 
     <section id="reglas">
         <h2>Reglas del Juego</h2>
-        <p class="fsr">Elige un personaje y un ataque para enfrentarte a los enemigos.</p>
-        <p class="fsr">Cada personaje tiene 3 vidas. Elige sabiamente tus ataques.</p>
-        <p class="fsr">Gana el combate reduciendo las vidas del enemigo a 0.</p>
-        <p class="fsr">Si pierdes, puedes reiniciar el juego.</p>
-        <p class="fsr">Cada ataque tiene un efecto diferente:</p>
-        <p class="fsr"><strong>Puño 👊🏼:</strong> Le gana a <i>Barrida 👣</i></p>
-        <p class="fsr"><strong>Patada 🦶🏼:</strong> Le gana a <i>Puño 👊🏼</i></p>
-        <p class="fsr"><strong>Barrida 👣:</strong> Le gana a <i>Patada 🦶🏼</i></p>
-        <p class="fsr">¡Diviértete y demuestra tu habilidad como Avatar!</p>
+        <p>Elige un personaje y un ataque para enfrentarte a los enemigos.</p>
+        <p>Cada personaje tiene 3 vidas. Elige sabiamente tus ataques.</p>
+        <p>Gana el combate reduciendo las vidas del enemigo a 0.</p>
+        <p>Si pierdes, puedes reiniciar el juego.</p>
+        <p>Cada ataque tiene un efecto diferente:</p>
+        <p><strong>Puño 👊🏼:</strong> Le gana a <i>Barrida 👣</i></p>
+        <p><strong>Patada 🦶🏼:</strong> Le gana a <i>Puño 👊🏼</i></p>
+        <p><strong>Barrida 👣:</strong> Le gana a <i>Patada 🦶🏼</i></p>
+        <p>¡Diviértete y demuestra tu habilidad como Avatar!</p>
     </section>
 
     <section id="selecionar-personaje">
         <h2>Selecciona tu personaje</h2>
-        <label for="Zuko" class="fss">Zuko 🔥</label>
-        <input type="radio" name="personaje" id="Zuko"/>
-
-        <label for="Katara" class="fss">Katara 💧</label>
-        <input type="radio" name="personaje" id="Katara"/>
-
-        <label for="Aang" class="fss">Aang 💨</label>
-        <input type="radio" name="personaje" id="Aang"/>
-
-        <label for="Toph" class="fss">Toph 🌱</label>
-        <input type="radio" name="personaje" id="Toph"/>
-
+        <div id="personajes-container"></div>
         <button class="boton-principal" id="boton-personaje">Seleccionar</button>
+        <button class="boton-agregar" id="boton-agregar-personaje">Agregar Nuevo Personaje</button>
+    </section>
+
+    <section id="agregar-personaje">
+        <h2>Agregar Nuevo Personaje</h2>
+        <input type="text" id="nuevo-personaje-nombre" placeholder="Nombre del personaje">
+        <input type="text" id="nuevo-personaje-emoji" placeholder="Emoji (ej: 🔥)">
+        <button class="boton-principal" id="boton-guardar-personaje">Guardar Personaje</button>
+        <button class="boton-agregar" id="boton-cancelar-agregar">Cancelar</button>
     </section>
 
     <section id="seleccionar-ataque">
         <h2>Elige tu ataque</h2>
-        <p class="fsr">Tu personaje (<span id="personaje-jugador"></span>) tiene <span>3</span> vidas</p>
-        <p class="fsr">El enemigo (<span id="personaje-pc"></span>) tiene <span>3</span> vidas</p>
+        <p>Tu personaje (<span id="personaje-jugador"></span>) tiene <span id="vidas-jugador">3</span> vidas</p>
+        <p>El enemigo (<span id="personaje-pc"></span>) tiene <span id="vidas-pc">3</span> vidas</p>
 
-        <p class="margen">
-            <button class="boton-fuego boton-border fsr" id="btn-punio">Puño 👊🏼</button>
-            <button class="boton-agua boton-border fsr" id="btn-patada">Patada 🦶🏼</button>
-            <button class="boton-tierra boton-border fsr" id="btn-barrida">Barrida 👣</button>
+        <p>
+            <button class="boton-principal" id="btn-punio">Puño 👊🏼</button>
+            <button class="boton-principal" id="btn-patada">Patada 🦶🏼</button>
+            <button class="boton-principal" id="btn-barrida">Barrida 👣</button>
         </p>
-        <p id="resultado-combate" style="font-weight: bold; font-size: 1.2rem; color: #ffffff;"></p>
+        <p id="resultado-combate"></p>
     </section>
 
     <section id="reiniciar">
-        <button class="boton-reiniciar boton-principal" id="boton-reiniciar">Reiniciar</button>
+        <button class="boton-principal" id="boton-reiniciar">Reiniciar Juego</button>
     </section>
 
     <script src="./js/avatar.js"></script>
