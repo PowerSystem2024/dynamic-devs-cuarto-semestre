@@ -35,6 +35,45 @@ const elements = {
     seccionReiniciar: document.getElementById("reiniciar")
 };
 
+// 📜 Función para alternar la visibilidad de las reglas
+document.addEventListener('DOMContentLoaded', function () {
+    // Obtener referencias a los elementos
+    const toggleButton = document.getElementById('toggleButton');
+    const reglasSection = document.getElementById('reglas');
+
+    // Verificar el estado guardado al cargar la página
+    const reglasOcultas = localStorage.getItem('reglasOcultas') === 'true';
+
+    // Aplicar el estado guardado
+    if (reglasOcultas) {
+        reglasSection.classList.add('hidden');
+        toggleButton.textContent = 'Mostrar Reglas';
+    } else {
+        reglasSection.classList.remove('hidden');
+        toggleButton.textContent = 'Ocultar Reglas';
+    }
+
+    // Función para alternar la visibilidad de las reglas
+    function toggleReglas() {
+        // Alternar la clase 'hidden' en la sección de reglas
+        reglasSection.classList.toggle('hidden');
+
+        // Guardar el nuevo estado en localStorage
+        const estanOcultas = reglasSection.classList.contains('hidden');
+        localStorage.setItem('reglasOcultas', estanOcultas);
+
+        // Cambiar el texto del botón según el estado
+        if (estanOcultas) {
+            toggleButton.textContent = 'Mostrar Reglas';
+        } else {
+            toggleButton.textContent = 'Ocultar Reglas';
+        }
+    }
+
+    // Agregar el evento de clic al botón
+    toggleButton.addEventListener('click', toggleReglas);
+});
+
 // 🔥 Ocultar todas las secciones excepto selección al inicio
 function ocultarSecciones() {
     elements.seccionSeleccion.style.display = "block";

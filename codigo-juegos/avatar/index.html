@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <meta author="Dynamic Devs">
@@ -7,45 +8,54 @@
     <meta name="description" content="Juego de Avatar: La leyenda de Aang">
     <meta name="keywords" content="Avatar, Aang, Katara, Zuko, Toph, Juego, HTML, CSS, JavaScript">
     <title>LA LEYENDA DE AANG: AVATAR</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&family=Zen+Dots&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&family=Zen+Dots&family=Nunito:wght@400;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="./css/style.css">
     <style>
         /* 🔥 Ocultamos secciones por defecto */
-        #seleccionar-ataque, #reiniciar {
+        #seleccionar-ataque,
+        #reiniciar {
             display: none;
         }
     </style>
 </head>
+
 <body>
 
     <h1>AVATAR 🔥 💧 🌱 💨 </h1>
 
     <section id="reglas">
         <h2>Reglas del Juego</h2>
-        <p class="fsr">Elige un personaje y un ataque para enfrentarte a los enemigos.</p>
-        <p class="fsr">Cada personaje tiene 3 vidas. Elige sabiamente tus ataques.</p>
-        <p class="fsr">Gana el combate reduciendo las vidas del enemigo a 0.</p>
-        <p class="fsr">Si pierdes, puedes reiniciar el juego.</p>
-        <p class="fsr">Cada ataque tiene un efecto diferente:</p>
-        <p class="fsr"><strong>Puño 👊🏼:</strong> Le gana a <i>Barrida 👣</i></p>
-        <p class="fsr"><strong>Patada 🦶🏼:</strong> Le gana a <i>Puño 👊🏼</i></p>
-        <p class="fsr"><strong>Barrida 👣:</strong> Le gana a <i>Patada 🦶🏼</i></p>
-        <p class="fsr">¡Diviértete y demuestra tu habilidad como Avatar!</p>
+        <p class="fsr">Elige un personaje y un ataque para enfrentarte a los enemigos.</br>
+            Cada personaje tiene 3 vidas. Elige sabiamente tus ataques.</br>
+            Gana el combate reduciendo las vidas del enemigo a 0.</br>
+            Si pierdes, puedes reiniciar el juego.</br>
+            Cada ataque tiene un efecto diferente:</br>
+            <strong>Puño 👊🏼:</strong> Le gana a <i>Barrida 👣</i></br>
+            <strong>Patada 🦶🏼:</strong> Le gana a <i>Puño 👊🏼</i></br>
+            <strong>Barrida 👣:</strong> Le gana a <i>Patada 🦶🏼</i></br>
+            ¡Diviértete y demuestra tu habilidad como Avatar!
+        </p>
     </section>
+
+    <div class="contenedor-boton">
+        <button id="toggleButton">Ocultar Reglas</button>
+    </div>
 
     <section id="selecionar-personaje">
         <h2>Selecciona tu personaje</h2>
         <label for="Zuko" class="fss">Zuko 🔥</label>
-        <input type="radio" name="personaje" id="Zuko"/>
+        <input type="radio" name="personaje" id="Zuko" />
 
         <label for="Katara" class="fss">Katara 💧</label>
-        <input type="radio" name="personaje" id="Katara"/>
+        <input type="radio" name="personaje" id="Katara" />
 
         <label for="Aang" class="fss">Aang 💨</label>
-        <input type="radio" name="personaje" id="Aang"/>
+        <input type="radio" name="personaje" id="Aang" />
 
         <label for="Toph" class="fss">Toph 🌱</label>
-        <input type="radio" name="personaje" id="Toph"/>
+        <input type="radio" name="personaje" id="Toph" />
 
         <button class="boton-principal" id="boton-personaje">Seleccionar</button>
     </section>
@@ -69,4 +79,5 @@
 
     <script src="./js/avatar.js"></script>
 </body>
+
 </html>
