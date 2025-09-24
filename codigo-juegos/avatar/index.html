@@ -45,20 +45,43 @@
 
     <section id="selecionar-personaje">
         <h2>Selecciona tu personaje</h2>
-        <label for="Zuko" class="fss">Zuko 🔥</label>
-        <input type="radio" name="personaje" id="Zuko" />
 
-        <label for="Katara" class="fss">Katara 💧</label>
-        <input type="radio" name="personaje" id="Katara" />
-
-        <label for="Aang" class="fss">Aang 💨</label>
-        <input type="radio" name="personaje" id="Aang" />
-
-        <label for="Toph" class="fss">Toph 🌱</label>
-        <input type="radio" name="personaje" id="Toph" />
+        <div class="contenedor-personajes" id="contenedor-personajes">
+            <!-- Los personajes se generarán automáticamente aquí -->
+        </div>
 
         <button class="boton-principal" id="boton-personaje">Seleccionar</button>
+        <button class="boton-agregar-personaje boton-principal" id="boton-agregar-personaje">➕ Agregar Nuevo
+            Personaje</button>
     </section>
+
+    <!-- Modal para agregar nuevo personaje -->
+    <div id="modal-agregar-personaje" class="modal">
+        <div class="modal-contenido">
+            <span class="cerrar-modal">&times;</span>
+            <h2>AGREGAR<br>NUEVO<br>PERSONAJE</h2>
+            <form id="form-nuevo-personaje">
+                <div class="form-group">
+                    <label for="nombre-personaje">Nombre del Personaje:</label>
+                    <input type="text" id="nombre-personaje" required maxlength="20" placeholder=" ">
+                </div>
+                <div class="form-group">
+                    <label for="elemento-personaje">Elemento:</label>
+                    <select id="elemento-personaje" required>
+                        <option value="">Selecciona un elemento</option>
+                        <option value="Fuego">Fuego 🔥</option>
+                        <option value="Agua">Agua 💧</option>
+                        <option value="Aire">Aire 💨</option>
+                        <option value="Tierra">Tierra 🌱</option>
+                    </select>
+                </div>
+                <div class="botones-form">
+                    <button type="button" id="cancelar-agregar" class="boton-principal">CANCELAR</button>
+                    <button type="submit" class="boton-principal">AGREGAR<br>PERSONAJE</button>
+                </div>
+            </form>
+        </div>
+    </div>
 
     <section id="seleccionar-ataque">
         <h2>Elige tu ataque</h2>

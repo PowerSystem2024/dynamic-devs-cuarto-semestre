@@ -6,18 +6,28 @@
 
 :root {
     /* Paleta de Colores Místicos */
-    --color-bg-light: #fdfaf0; /* Fondo muy claro, crema suave */
-    --color-bg-medium: #e0d9c4; /* Tono medio, beige cálido */
-    --color-text-dark: #3c4048; /* Azul pizarra oscuro para texto principal */
-    --color-accent-gold: #c28c47; /* Oro antiguo, elegante */
-    --color-shadow-soft: rgba(0, 0, 0, 0.1); /* Sombra muy suave */
-    --color-border-subtle: #b4a78c; /* Borde grisáceo-beige */
+    --color-bg-light: #fdfaf0;
+    /* Fondo muy claro, crema suave */
+    --color-bg-medium: #e0d9c4;
+    /* Tono medio, beige cálido */
+    --color-text-dark: #3c4048;
+    /* Azul pizarra oscuro para texto principal */
+    --color-accent-gold: #c28c47;
+    /* Oro antiguo, elegante */
+    --color-shadow-soft: rgba(0, 0, 0, 0.1);
+    /* Sombra muy suave */
+    --color-border-subtle: #b4a78c;
+    /* Borde grisáceo-beige */
 
     /* Colores Elementales con profundidad */
-    --color-fuego: #e6522c; /* Rojo naranja cálido */
-    --color-agua: #3d8bff; /* Azul agua vibrante */
-    --color-tierra: #7a6148; /* Marrón tierra profundo */
-    --color-aire: #9fe2bf; /* Verde menta suave */
+    --color-fuego: #e6522c;
+    /* Rojo naranja cálido */
+    --color-agua: #3d8bff;
+    /* Azul agua vibrante */
+    --color-tierra: #7a6148;
+    /* Marrón tierra profundo */
+    --color-aire: #9fe2bf;
+    /* Verde menta suave */
 
     /* Gradientes Elementales para efectos de brillo */
     --gradient-fuego-light: radial-gradient(circle, #ff9f7f 0%, #e6522c 100%);
@@ -27,9 +37,12 @@
 }
 
 body {
-    font-family: 'Nunito', sans-serif; /* Fuente legible y amigable */
-    background: var(--color-bg-light); /* Fondo suave y claro */
-    color: var(--color-text-dark); /* Texto oscuro para contraste */
+    font-family: 'Nunito', sans-serif;
+    /* Fuente legible y amigable */
+    background: var(--color-bg-light);
+    /* Fondo suave y claro */
+    color: var(--color-text-dark);
+    /* Texto oscuro para contraste */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -45,34 +58,49 @@ header {
 }
 
 h1 {
-    font-family: 'Cormorant Garamond', serif; /* Elegante y con presencia */
-    color: var(--color-accent-gold); /* Oro místico */
-    font-size: 5em; /* Grande y majestuoso */
-    text-shadow: 2px 2px 5px rgba(0,0,0,0.1), 0 0 20px rgba(194, 140, 71, 0.5); /* Sombra y brillo dorado */
+    font-family: 'Cormorant Garamond', serif;
+    /* Elegante y con presencia */
+    color: var(--color-accent-gold);
+    /* Oro místico */
+    font-size: 5em;
+    /* Grande y majestuoso */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1), 0 0 20px rgba(194, 140, 71, 0.5);
+    /* Sombra y brillo dorado */
     letter-spacing: 2px;
     margin-bottom: 15px;
-    text-transform: capitalize; /* Iniciales mayúsculas */
+    text-transform: capitalize;
+    /* Iniciales mayúsculas */
     animation: fadeInScale 1.5s ease-out;
 }
 
 @keyframes fadeInScale {
-    from { opacity: 0; transform: scale(0.9); }
-    to { opacity: 1; transform: scale(1); }
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 h2 {
-    font-family: 'Zen Dots', cursive; /* Mística y moderna para subtítulos */
+    font-family: 'Zen Dots', cursive;
+    /* Mística y moderna para subtítulos */
     color: var(--color-text-dark);
     margin-bottom: 30px;
     text-align: center;
-    font-size: 2.5em; /* Aumentado */
+    font-size: 2.5em;
+    /* Aumentado */
     text-transform: uppercase;
     letter-spacing: 1px;
     position: relative;
     padding-bottom: 10px;
 }
 
-h2::after { /* Separador sutil */
+h2::after {
+    /* Separador sutil */
     content: '';
     position: absolute;
     bottom: 0;
@@ -86,17 +114,20 @@ h2::after { /* Separador sutil */
 
 main {
     width: 100%;
-    max-width: 960px; /* Más espacio para una sensación de amplitud */
+    max-width: 960px;
+    /* Más espacio para una sensación de amplitud */
 }
 
 /* Estilo de las secciones - Pergaminos de Conocimiento */
 section {
     background-color: var(--color-bg-light);
     border: 1px solid var(--color-border-subtle);
-    border-radius: 15px; /* Bordes suaves */
+    border-radius: 15px;
+    /* Bordes suaves */
     padding: 40px;
     margin-bottom: 40px;
-    box-shadow: 0 10px 30px var(--color-shadow-soft); /* Sombra suave y profunda */
+    box-shadow: 0 10px 30px var(--color-shadow-soft);
+    /* Sombra suave y profunda */
     text-align: center;
     position: relative;
     overflow: hidden;
@@ -129,28 +160,31 @@ section:hover {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 40px; /* Más espacio entre personajes */
+    gap: 40px;
+    /* Más espacio entre personajes */
     margin-bottom: 40px;
-}
-
-.opcion-personaje input[type="radio"] {
-    display: none;
 }
 
 .tarjeta-radio {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center; /* Centrar contenido */
-    width: 200px; /* Más ancho */
-    height: 240px; /* Más alto */
+    justify-content: center;
+    /* Centrar contenido */
+    width: 200px;
+    /* Más ancho */
+    height: 240px;
+    /* Más alto */
     border: 3px solid var(--color-border-subtle);
-    border-radius: 20px; /* Más redondeado */
+    border-radius: 20px;
+    /* Más redondeado */
     cursor: pointer;
-    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); /* Transición suave */
-    background: var(--color-bg-medium); /* Fondo medio */
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    /* Transición suave */
+    background: var(--color-bg-medium);
+    /* Fondo medio */
     padding: 20px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     position: relative;
     overflow: hidden;
 }
@@ -169,6 +203,7 @@ section:hover {
     transform: translate(-50%, -50%);
     z-index: 0;
 }
+
 .tarjeta-radio:hover::before {
     width: 150%;
     height: 150%;
@@ -176,107 +211,143 @@ section:hover {
 }
 
 .tarjeta-radio:hover {
-    transform: translateY(-10px) scale(1.02); /* Elevar y escalar más */
-    box-shadow: 0 15px 30px rgba(0,0,0,0.25);
-    border-color: var(--color-accent-gold); /* Borde dorado */
+    transform: translateY(-10px) scale(1.02);
+    /* Elevar y escalar más */
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+    border-color: var(--color-accent-gold);
+    /* Borde dorado */
 }
 
 /* Colores específicos para el brillo de la tarjeta al pasar el mouse */
-.tarjeta-radio.fuego:hover::before { background: var(--gradient-fuego-light); }
-.tarjeta-radio.agua:hover::before { background: var(--gradient-agua-light); }
-.tarjeta-radio.tierra:hover::before { background: var(--gradient-tierra-light); }
-.tarjeta-radio.aire:hover::before { background: var(--gradient-aire-light); }
+.tarjeta-radio.fuego:hover::before {
+    background: var(--gradient-fuego-light);
+}
+
+.tarjeta-radio.agua:hover::before {
+    background: var(--gradient-agua-light);
+}
+
+.tarjeta-radio.tierra:hover::before {
+    background: var(--gradient-tierra-light);
+}
+
+.tarjeta-radio.aire:hover::before {
+    background: var(--gradient-aire-light);
+}
 
 
-.opcion-personaje input[type="radio"]:checked + .tarjeta-radio {
-    border-color: var(--color-accent-gold); /* Borde dorado para selección */
-    background: var(--color-bg-light); /* Fondo más claro al seleccionar */
-    box-shadow: 0 0 25px rgba(194, 140, 71, 0.7), 0 0 40px rgba(194, 140, 71, 0.4); /* Brillo dorado */
+.opcion-personaje input[type="radio"]:checked+.tarjeta-radio {
+    border-color: var(--color-accent-gold);
+    /* Borde dorado para selección */
+    background: var(--color-bg-light);
+    /* Fondo más claro al seleccionar */
+    box-shadow: 0 0 25px rgba(194, 140, 71, 0.7), 0 0 40px rgba(194, 140, 71, 0.4);
+    /* Brillo dorado */
     transform: translateY(-8px) scale(1.04);
     color: var(--color-text-dark);
 }
 
-.opcion-personaje input[type="radio"]:checked + .tarjeta-radio::before {
-    opacity: 0.4; /* Brillo más pronunciado al seleccionar */
+.opcion-personaje input[type="radio"]:checked+.tarjeta-radio::before {
+    opacity: 0.4;
+    /* Brillo más pronunciado al seleccionar */
     width: 180%;
     height: 180%;
 }
 
 
 .tarjeta-radio p {
-    font-size: 1.8em; /* ¡Más grande para los nombres de personajes! */
-    font-family: 'Zen Dots', cursive; /* Fuente mística */
+    font-size: 1.8em;
+    /* ¡Más grande para los nombres de personajes! */
+    font-family: 'Zen Dots', cursive;
+    /* Fuente mística */
     font-weight: bold;
     color: var(--color-text-dark);
     margin-bottom: 10px;
     text-transform: uppercase;
     letter-spacing: 1px;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-    z-index: 1; /* Asegurar que el texto esté sobre el brillo */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    /* Asegurar que el texto esté sobre el brillo */
 }
 
 .icono-elemento {
-    width: 90px; /* Iconos aún más grandes */
+    width: 90px;
+    /* Iconos aún más grandes */
     height: 90px;
     margin-bottom: 12px;
     object-fit: contain;
-    filter: drop-shadow(0 0 10px rgba(0,0,0,0.15)); /* Sombra suave para que destaquen */
+    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.15));
+    /* Sombra suave para que destaquen */
     z-index: 1;
 }
 
 .tarjeta-radio span {
-    font-size: 1.4em; /* ¡Más grande para los emojis elementales! */
+    font-size: 1.4em;
+    /* ¡Más grande para los emojis elementales! */
     z-index: 1;
 }
 
 /* Botones Principales - Sigilo y Poder */
-#toggleButton, .boton-principal {
-    background-color: var(--color-accent-gold); /* Oro místico */
+#toggleButton,
+.boton-principal {
+    background-color: var(--color-accent-gold);
+    /* Oro místico */
     color: white;
     border: none;
-    padding: 18px 40px; /* Más padding para que sean más grandes */
-    font-size: 1.3em; /* Más grande */
-    font-family: 'Zen Dots', cursive; /* Fuente del título */
+    padding: 18px 40px;
+    /* Más padding para que sean más grandes */
+    font-size: 1.3em;
+    /* Más grande */
+    font-family: 'Zen Dots', cursive;
+    /* Fuente del título */
     font-weight: normal;
-    border-radius: 30px; /* Suavemente redondeado */
+    border-radius: 30px;
+    /* Suavemente redondeado */
     cursor: pointer;
     transition: all 0.3s ease-out;
     text-transform: uppercase;
     letter-spacing: 1.5px;
     box-shadow: 0 6px 15px var(--color-shadow-soft),
-                inset 0 -3px 5px rgba(0,0,0,0.1);
+        inset 0 -3px 5px rgba(0, 0, 0, 0.1);
     position: relative;
     overflow: hidden;
     z-index: 1;
 }
 
-#toggleButton::before, .boton-principal::before { /* Brillo al pasar el mouse */
+#toggleButton::before,
+.boton-principal::before {
+    /* Brillo al pasar el mouse */
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(255,255,255,0.1);
+    background: rgba(255, 255, 255, 0.1);
     transform: translateX(-100%) skewX(-30deg);
     transition: transform 0.4s ease-out;
 }
 
-#toggleButton:hover::before, .boton-principal:hover::before {
+#toggleButton:hover::before,
+.boton-principal:hover::before {
     transform: translateX(100%) skewX(-30deg);
 }
 
-#toggleButton:hover, .boton-principal:hover {
-    background-color: #d8a05c; /* Oro más claro al pasar el mouse */
+#toggleButton:hover,
+.boton-principal:hover {
+    background-color: #d8a05c;
+    /* Oro más claro al pasar el mouse */
     transform: translateY(-5px) scale(1.02);
-    box-shadow: 0 12px 25px rgba(0,0,0,0.15),
-                0 0 20px var(--color-accent-gold); /* Brillo dorado */
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15),
+        0 0 20px var(--color-accent-gold);
+    /* Brillo dorado */
 }
 
-#toggleButton:active, .boton-principal:active {
+#toggleButton:active,
+.boton-principal:active {
     transform: translateY(1px) scale(0.98);
-    box-shadow: 0 3px 8px rgba(0,0,0,0.15),
-                inset 0 3px 5px rgba(0,0,0,0.2);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15),
+        inset 0 3px 5px rgba(0, 0, 0, 0.2);
 }
 
 /* Sección de Ataque - El Flujo del Combate */
@@ -288,12 +359,14 @@ section:hover {
     display: flex;
     justify-content: space-around;
     margin-bottom: 30px;
-    font-size: 1.5em; /* Aumentado */
-    background: var(--color-bg-medium); /* Fondo medio para vidas */
+    font-size: 1.5em;
+    /* Aumentado */
+    background: var(--color-bg-medium);
+    /* Fondo medio para vidas */
     padding: 20px;
     border-radius: 12px;
     border: 1px solid var(--color-border-subtle);
-    box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
     color: var(--color-text-dark);
 }
 
@@ -301,14 +374,17 @@ section:hover {
     display: flex;
     align-items: center;
     gap: 10px;
-    font-family: 'Cormorant Garamond', serif; /* Elegante para la info de vida */
+    font-family: 'Cormorant Garamond', serif;
+    /* Elegante para la info de vida */
 }
 
 .info-vidas span {
     font-weight: bold;
-    font-size: 2em; /* ¡Más grande para los números de vida! */
-    color: var(--color-accent-gold); /* Oro para los números */
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.1), 0 0 10px rgba(194, 140, 71, 0.5);
+    font-size: 2em;
+    /* ¡Más grande para los números de vida! */
+    color: var(--color-accent-gold);
+    /* Oro para los números */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1), 0 0 10px rgba(194, 140, 71, 0.5);
     /* Descomenta y activa con JS si quieres animación: */
     /* animation: pulseLife 0.8s ease-out forwards; */
 }
@@ -319,7 +395,8 @@ section:hover {
     100% { transform: scale(1); color: var(--color-accent-gold); }
 } */
 
-#personaje-jugador, #personaje-pc {
+#personaje-jugador,
+#personaje-pc {
     text-transform: capitalize;
     color: var(--color-text-dark);
 }
@@ -335,34 +412,45 @@ section:hover {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 25px; /* Más espacio entre botones de ataque */
+    gap: 25px;
+    /* Más espacio entre botones de ataque */
 }
-.fss{
+
+.fss {
     font-size: 1.4rem;
 }
-.fsr{
+
+.fsr {
     font-size: 1.4rem;
-    padding:  10px 20px;
+    padding: 10px 20px;
 }
+
 /* Botones de Ataque - Concentración Elemental */
 .boton-ataque {
     color: white;
-    padding: 20px 35px; /* ¡Más padding para hacerlos grandes! */
-    font-size: 2.5em; /* ¡Más grande y legible! */
+    padding: 20px 35px;
+    /* ¡Más padding para hacerlos grandes! */
+    font-size: 2.5em;
+    /* ¡Más grande y legible! */
     font-weight: bold;
-    border-radius: 15px; /* Ligeramente redondeados */
+    border-radius: 15px;
+    /* Ligeramente redondeados */
     cursor: pointer;
     transition: all 0.3s ease-out;
-    min-width: 180px; /* Ancho mínimo generoso */
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2),
-                inset 0 -4px 0px rgba(0,0,0,0.15); /* Sombra interna para volumen */
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+    min-width: 180px;
+    /* Ancho mínimo generoso */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2),
+        inset 0 -4px 0px rgba(0, 0, 0, 0.15);
+    /* Sombra interna para volumen */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
     position: relative;
     overflow: hidden;
-    border: 2px solid transparent; /* Borde inicial transparente */
+    border: 2px solid transparent;
+    /* Borde inicial transparente */
 }
 
-.boton-ataque::after { /* Brillo elemental sutil */
+.boton-ataque::after {
+    /* Brillo elemental sutil */
     content: '';
     position: absolute;
     top: -50%;
@@ -380,76 +468,122 @@ section:hover {
 }
 
 .boton-ataque:hover {
-    transform: translateY(-7px) scale(1.04); /* Elevar y escalar más */
-    box-shadow: 0 10px 25px rgba(0,0,0,0.25);
-    border-color: white; /* Borde blanco al pasar el mouse */
+    transform: translateY(-7px) scale(1.04);
+    /* Elevar y escalar más */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+    border-color: white;
+    /* Borde blanco al pasar el mouse */
 }
 
 .boton-ataque:active {
     transform: translateY(1px) scale(0.97);
-    box-shadow: 0 3px 8px rgba(0,0,0,0.2),
-                inset 0 3px 2px rgba(0,0,0,0.25);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2),
+        inset 0 3px 2px rgba(0, 0, 0, 0.25);
 }
 
 /* Colores específicos para botones de ataque con degradados y brillo */
-#btn-punio { background-color: var(--color-fuego); }
-#btn-punio:hover::after { background: var(--gradient-fuego-light); }
-#btn-punio:hover { box-shadow: 0 10px 25px rgba(0,0,0,0.25), 0 0 20px var(--color-fuego); }
+#btn-punio {
+    background-color: var(--color-fuego);
+}
 
-#btn-patada { background-color: var(--color-agua); }
-#btn-patada:hover::after { background: var(--gradient-agua-light); }
-#btn-patada:hover { box-shadow: 0 10px 25px rgba(0,0,0,0.25), 0 0 20px var(--color-agua); }
+#btn-punio:hover::after {
+    background: var(--gradient-fuego-light);
+}
 
-#btn-barrida { background-color: var(--color-tierra); }
-#btn-barrida:hover::after { background: var(--gradient-tierra-light); }
-#btn-barrida:hover { box-shadow: 0 10px 25px rgba(0,0,0,0.25), 0 0 20px var(--color-tierra); }
+#btn-punio:hover {
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25), 0 0 20px var(--color-fuego);
+}
+
+#btn-patada {
+    background-color: var(--color-agua);
+}
+
+#btn-patada:hover::after {
+    background: var(--gradient-agua-light);
+}
+
+#btn-patada:hover {
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25), 0 0 20px var(--color-agua);
+}
+
+#btn-barrida {
+    background-color: var(--color-tierra);
+}
+
+#btn-barrida:hover::after {
+    background: var(--gradient-tierra-light);
+}
+
+#btn-barrida:hover {
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25), 0 0 20px var(--color-tierra);
+}
 
 /* Si tuvieras un botón de aire: */
-.boton-aire { background-color: var(--color-aire); }
-.boton-aire:hover::after { background: var(--gradient-aire-light); }
-.boton-aire:hover { box-shadow: 0 10px 25px rgba(0,0,0,0.25), 0 0 20px var(--color-aire); }
+.boton-aire {
+    background-color: var(--color-aire);
+}
+
+.boton-aire:hover::after {
+    background: var(--gradient-aire-light);
+}
+
+.boton-aire:hover {
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25), 0 0 20px var(--color-aire);
+}
 
 
 /* Sección de Mensajes - El Scriptorium de Batalla */
 #mensajes h2 {
     color: var(--color-text-dark);
 }
+
 #mensajes p {
     font-size: 1.3em;
     margin-bottom: 15px;
 }
+
 #resultado-combate {
-    background-color: var(--color-text-dark); /* Fondo oscuro para contraste */
-    border: 1px solid var(--color-accent-gold); /* Borde dorado */
+    background-color: var(--color-text-dark);
+    /* Fondo oscuro para contraste */
+    border: 1px solid var(--color-accent-gold);
+    /* Borde dorado */
     border-radius: 10px;
     padding: 25px;
     margin-top: 35px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.2), inset 0 0 10px rgba(255,255,255,0.05);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2), inset 0 0 10px rgba(255, 255, 255, 0.05);
     font-size: 1.4em;
-    color: white; /* Letras BLANCAS para el resultado */
+    color: white;
+    /* Letras BLANCAS para el resultado */
     text-align: center;
     position: relative;
     overflow: hidden;
 }
+
 #resultado-combate p {
     font-weight: bold;
-    color: white !important; /* Asegurar que el texto sea blanco */
-    text-shadow: 0 0 8px rgba(255,255,255,0.8);
+    color: white !important;
+    /* Asegurar que el texto sea blanco */
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
 }
-#ataque-jugador-mensaje, #ataque-enemigo-mensaje {
+
+#ataque-jugador-mensaje,
+#ataque-enemigo-mensaje {
     font-style: normal;
     font-size: 1.2em;
-    color: white !important; /* Asegurar que el texto sea blanco */
+    color: white !important;
+    /* Asegurar que el texto sea blanco */
 }
 
 /* Efectos visuales para el resultado (añadir con JS si el resultado es "ganaste" o "perdiste") */
 .resultado-ganaste {
-    color: #32CD32 !important; /* Verde lima */
+    color: #32CD32 !important;
+    /* Verde lima */
     text-shadow: 0 0 10px #32CD32, 0 0 20px rgba(50, 205, 50, 0.6) !important;
 }
 
 .resultado-perdiste {
-    color: var(--color-fuego) !important; /* Rojo fuego */
+    color: var(--color-fuego) !important;
+    /* Rojo fuego */
     text-shadow: 0 0 10px var(--color-fuego), 0 0 20px rgba(230, 82, 44, 0.6) !important;
 }
 
@@ -457,13 +591,17 @@ section:hover {
 #reiniciar {
     margin-top: 50px;
 }
+
 .boton-reiniciar {
-    background-color: var(--color-accent-gold); /* Oro para reiniciar */
+    background-color: var(--color-accent-gold);
+    /* Oro para reiniciar */
     border: none;
 }
+
 .boton-reiniciar:hover {
-    background-color: #d8a05c; /* Oro más claro */
-    box-shadow: 0 12px 25px rgba(0,0,0,0.15), 0 0 20px var(--color-accent-gold);
+    background-color: #d8a05c;
+    /* Oro más claro */
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15), 0 0 20px var(--color-accent-gold);
 }
 
 
@@ -480,54 +618,68 @@ footer {
     h1 {
         font-size: 3.5em;
     }
+
     h2 {
         font-size: 2em;
     }
+
     section {
         padding: 25px;
     }
+
     .contenedor-opciones {
         flex-direction: column;
         align-items: center;
         gap: 25px;
     }
+
     .tarjeta-radio {
         width: 85%;
         max-width: 280px;
         height: auto;
         padding: 18px;
     }
+
     .tarjeta-radio p {
         font-size: 1.6em;
     }
+
     .tarjeta-radio span {
         font-size: 1.2em;
     }
+
     .icono-elemento {
         width: 80px;
         height: 80px;
     }
+
     .info-vidas {
         flex-direction: column;
         gap: 12px;
         font-size: 1.3em;
     }
+
     .info-vidas span {
         font-size: 1.8em;
     }
-    .boton-principal, .boton-ataque {
+
+    .boton-principal,
+    .boton-ataque {
         padding: 15px 30px;
         font-size: 1.2em;
     }
+
     .contenedor-botones-ataque {
         flex-direction: column;
         align-items: center;
         gap: 20px;
     }
+
     .boton-ataque {
         width: 90%;
         max-width: 250px;
     }
+
     #resultado-combate {
         font-size: 1.2em;
         padding: 20px;
@@ -538,41 +690,174 @@ footer {
     h1 {
         font-size: 2.8em;
     }
+
     h2 {
         font-size: 1.6em;
     }
+
     section {
         padding: 20px;
     }
+
     .tarjeta-radio {
         width: 95%;
         max-width: 250px;
     }
+
     .tarjeta-radio p {
         font-size: 1.4em;
     }
+
     .tarjeta-radio span {
         font-size: 1em;
     }
+
     .icono-elemento {
         width: 70px;
         height: 70px;
     }
+
     .info-vidas {
         font-size: 1.1em;
     }
+
     .info-vidas span {
         font-size: 1.5em;
     }
-    .boton-principal, .boton-ataque {
+
+    .boton-principal,
+    .boton-ataque {
         padding: 12px 25px;
         font-size: 1.1em;
     }
+
     .boton-ataque {
         width: 95%;
     }
+
     #resultado-combate {
         font-size: 1.1em;
         padding: 18px;
     }
+}
+
+/* Modal para agregar personajes */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-contenido {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 30px;
+    border-radius: 15px;
+    width: 80%;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.cerrar-modal {
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #666;
+}
+
+.modal-contenido h2 {
+    font-family: 'Zen Dots', cursive;
+    font-size: 1.5rem;
+    color: #2c3e50;
+    margin-bottom: 25px;
+    line-height: 1.3;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #34495e;
+    font-family: 'Nunito', sans-serif;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #bdc3c7;
+    border-radius: 8px;
+    font-size: 16px;
+    font-family: 'Nunito', sans-serif;
+    transition: border-color 0.3s;
+    box-sizing: border-box;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #3498db;
+}
+
+.botones-form {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 25px;
+}
+
+.boton-principal {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-family: 'Zen Dots', cursive;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-transform: uppercase;
+    line-height: 1.2;
+    min-width: 120px;
+}
+
+#cancelar-agregar {
+    background-color: #e74c3c;
+    color: white;
+}
+
+#cancelar-agregar:hover {
+    background-color: #c0392b;
+}
+
+.boton-principal[type="submit"] {
+    background-color: #27ae60;
+    color: white;
+}
+
+.boton-principal[type="submit"]:hover {
+    background-color: #219a52;
+}
+
+.boton-agregar-personaje {
+    margin: 20px auto;
+    display: block;
+    background-color: #9b59b6;
+    color: white;
+    padding: 12px 25px;
+    font-size: 1rem;
+}
+
+.boton-agregar-personaje:hover {
+    background-color: #8e44ad;
 }
