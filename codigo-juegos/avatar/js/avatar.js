@@ -2,14 +2,58 @@
 const gameState = {
     ataqueJugador: "",
     ataquePC: "",
-    personajeJugador: "",
-    personajePC: "",
+    personajeJugador: null,
+    personajePC: null,
     vidasJugador: 3,
     vidasPC: 3
 };
 
-// 🌍 Constantes universales
-const PERSONAJES = ["Zuko 🔥", "Katara 💧", "Aang 💨", "Toph 🌱"];
+// 👤 Clase Personaje
+class Personaje {
+    constructor(nombre, elemento, vidas = 3) {
+        this.nombre = nombre;
+        this.elemento = elemento;
+        this.vidas = vidas;
+        this.emoji = this.obtenerEmojiElemento();
+    }
+
+    obtenerEmojiElemento() {
+        const emojis = {
+            "Fuego": "🔥",
+            "Agua": "💧",
+            "Aire": "💨",
+            "Tierra": "🌱"
+        };
+        return emojis[this.elemento] || "❓";
+    }
+
+    obtenerNombreCompleto() {
+        return `${this.nombre} ${this.emoji}`;
+    }
+
+    perderVida() {
+        if (this.vidas > 0) {
+            this.vidas--;
+        }
+        return this.vidas;
+    }
+
+    reiniciarVidas() {
+        this.vidas = 3;
+    }
+}
+
+// 🌍 Constantes universales (actualizadas)
+const PERSONAJES = [
+    new Personaje("Zuko", "Fuego"),
+    new Personaje("Katara", "Agua"),
+    new Personaje("Aang", "Aire"),
+    new Personaje("Toph", "Tierra")
+    // ¡Fácil agregar nuevos personajes!
+    // new Personaje("Sokka", "Agua"),
+    // new Personaje("Iroh", "Fuego"),
+];
+
 const ATAQUES = ["Puño", "Patada", "Barrida"];
 const EMOJIS = {
     "Puño": "👊🏼",
@@ -17,7 +61,7 @@ const EMOJIS = {
     "Barrida": "👣"
 };
 
-// 📌 Selectores globales
+// 📌 Selectores globales (actualizados)
 const elements = {
     personajeJugador: document.getElementById("personaje-jugador"),
     personajePC: document.getElementById("personaje-pc"),
@@ -32,19 +76,17 @@ const elements = {
     textosAtaque: document.querySelectorAll("section#seleccionar-ataque p"),
     seccionSeleccion: document.getElementById("selecionar-personaje"),
     seccionAtaque: document.getElementById("seleccionar-ataque"),
-    seccionReiniciar: document.getElementById("reiniciar")
+    seccionReiniciar: document.getElementById("reiniciar"),
+    contenedorPersonajes: document.getElementById("contenedor-personajes")
 };
 
 // 📜 Función para alternar la visibilidad de las reglas
 document.addEventListener('DOMContentLoaded', function () {
-    // Obtener referencias a los elementos
     const toggleButton = document.getElementById('toggleButton');
     const reglasSection = document.getElementById('reglas');
 
-    // Verificar el estado guardado al cargar la página
     const reglasOcultas = localStorage.getItem('reglasOcultas') === 'true';
 
-    // Aplicar el estado guardado
     if (reglasOcultas) {
         reglasSection.classList.add('hidden');
         toggleButton.textContent = 'Mostrar Reglas';
@@ -53,16 +95,11 @@ document.addEventListener('DOMContentLoaded', function () {
         toggleButton.textContent = 'Ocultar Reglas';
     }
 
-    // Función para alternar la visibilidad de las reglas
     function toggleReglas() {
-        // Alternar la clase 'hidden' en la sección de reglas
         reglasSection.classList.toggle('hidden');
-
-        // Guardar el nuevo estado en localStorage
         const estanOcultas = reglasSection.classList.contains('hidden');
         localStorage.setItem('reglasOcultas', estanOcultas);
 
-        // Cambiar el texto del botón según el estado
         if (estanOcultas) {
             toggleButton.textContent = 'Mostrar Reglas';
         } else {
@@ -70,7 +107,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // Agregar el evento de clic al botón
     toggleButton.addEventListener('click', toggleReglas);
 });
 
@@ -81,19 +117,20 @@ function ocultarSecciones() {
     elements.seccionReiniciar.style.display = "none";
 }
 
-// 🎯 Seleccionar personaje del jugador
+// 🎯 Seleccionar personaje del jugador (MODIFICADA para trabajar con generación dinámica)
 function seleccionarPersonajeJugador() {
-    const seleccion = PERSONAJES.find(nombre =>
-        document.getElementById(nombre.split(" ")[0]).checked
-    );
-    gameState.personajeJugador = seleccion || "";
+    const personajeSeleccionado = PERSONAJES.find(personaje => {
+        const radioButton = document.getElementById(personaje.nombre);
+        return radioButton && radioButton.checked;
+    });
+
+    gameState.personajeJugador = personajeSeleccionado || null;
 
     if (gameState.personajeJugador) {
-        mostrarMensaje(`Seleccionaste a ${gameState.personajeJugador}`);
-        elements.personajeJugador.innerText = gameState.personajeJugador;
+        mostrarMensaje(`Seleccionaste a ${gameState.personajeJugador.obtenerNombreCompleto()}`);
+        elements.personajeJugador.innerText = gameState.personajeJugador.obtenerNombreCompleto();
         seleccionarPersonajePC();
 
-        // 🔥 Cambiar a pantalla de ataque
         elements.seccionSeleccion.style.display = "none";
         elements.seccionAtaque.style.display = "block";
     } else {
@@ -105,8 +142,8 @@ function seleccionarPersonajeJugador() {
 function seleccionarPersonajePC() {
     const opcionesPC = PERSONAJES.filter(p => p !== gameState.personajeJugador);
     gameState.personajePC = opcionesPC[Math.floor(Math.random() * opcionesPC.length)];
-    mostrarMensaje(`El personaje de la PC es: ${gameState.personajePC}`);
-    elements.personajePC.innerText = gameState.personajePC;
+    mostrarMensaje(`El personaje de la PC es: ${gameState.personajePC.obtenerNombreCompleto()}`);
+    elements.personajePC.innerText = gameState.personajePC.obtenerNombreCompleto();
     actualizarVidas();
 }
 
@@ -127,10 +164,12 @@ function combate(ataqueJugador, ataquePC) {
         (ataqueJugador === "Barrida" && ataquePC === "Patada")
     ) {
         resultado = "Ganaste esta ronda";
-        gameState.vidasPC--;
+        gameState.personajePC.perderVida();
+        gameState.vidasPC = gameState.personajePC.vidas;
     } else {
         resultado = "Perdiste esta ronda";
-        gameState.vidasJugador--;
+        gameState.personajeJugador.perderVida();
+        gameState.vidasJugador = gameState.personajeJugador.vidas;
     }
 
     elements.resultadoCombate.innerText =
@@ -144,9 +183,9 @@ function combate(ataqueJugador, ataquePC) {
 // ❤️ Actualizar vidas
 function actualizarVidas() {
     elements.textosAtaque[0].innerHTML =
-        `Tu personaje (<span>${gameState.personajeJugador}</span>) tiene <span>${gameState.vidasJugador}</span> vidas`;
+        `Tu personaje (<span>${gameState.personajeJugador.obtenerNombreCompleto()}</span>) tiene <span>${gameState.vidasJugador}</span> vidas`;
     elements.textosAtaque[1].innerHTML =
-        `El personaje enemigo (<span>${gameState.personajePC}</span>) tiene <span>${gameState.vidasPC}</span> vidas`;
+        `El personaje enemigo (<span>${gameState.personajePC.obtenerNombreCompleto()}</span>) tiene <span>${gameState.vidasPC}</span> vidas`;
 }
 
 // 🛑 Verificar fin de juego
@@ -174,10 +213,31 @@ function deshabilitarBotones() {
 
 // 🔄 Reiniciar juego
 function reiniciarJuego() {
-    location.reload();
+    if (gameState.personajeJugador) gameState.personajeJugador.reiniciarVidas();
+    if (gameState.personajePC) gameState.personajePC.reiniciarVidas();
+
+    gameState.vidasJugador = 3;
+    gameState.vidasPC = 3;
+    gameState.ataqueJugador = "";
+    gameState.ataquePC = "";
+
+    elements.seccionReiniciar.style.display = "none";
+    elements.seccionSeleccion.style.display = "block";
+
+    // Limpiar selección de personajes
+    const radioButtons = document.querySelectorAll('input[name="personaje"]');
+    radioButtons.forEach(radio => radio.checked = false);
+
+    elements.botonesAtaque.forEach(boton => boton.disabled = false);
+
+    elements.personajeJugador.innerText = "";
+    elements.personajePC.innerText = "";
+    elements.resultadoCombate.innerText = "";
+
+    mostrarMensaje("Juego reiniciado. ¡Selecciona un personaje!");
 }
 
-// 💬 Mostrar mensajes (ahora alert, fácil de mejorar con UI)
+// 💬 Mostrar mensajes
 function mostrarMensaje(mensaje) {
     alert(mensaje);
 }
@@ -188,7 +248,6 @@ function inicializarEventos() {
     elements.botonSeleccionar.addEventListener("click", seleccionarPersonajeJugador);
     elements.botonReiniciar.addEventListener("click", reiniciarJuego);
 
-    // Eventos de ataque dinámicos
     ATAQUES.forEach((ataque, index) => {
         elements.botonesAtaque[index].addEventListener("click", () => {
             gameState.ataqueJugador = ataque;
@@ -197,6 +256,27 @@ function inicializarEventos() {
         });
     });
 }
+
+// Función para generar los personajes dinámicamente
+function generarPersonajes() {
+    const contenedor = document.getElementById('contenedor-personajes');
+
+    PERSONAJES.forEach((personaje, index) => {
+        const divPersonaje = document.createElement('div');
+        divPersonaje.className = 'opcion-personaje';
+
+        // QUITAR el display: none del input radio
+        divPersonaje.innerHTML = `
+            <label for="${personaje.nombre}" class="fss">${personaje.nombre} ${personaje.emoji}</label>
+            <input type="radio" name="personaje" id="${personaje.nombre}" />
+            `;
+
+        contenedor.appendChild(divPersonaje);
+    });
+}
+
+// 🛠️ Generar personajes al cargar la página
+document.addEventListener('DOMContentLoaded', generarPersonajes);
 
 // 🚀 Iniciar juego
 inicializarEventos();

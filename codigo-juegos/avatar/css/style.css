@@ -133,10 +133,6 @@ section:hover {
     margin-bottom: 40px;
 }
 
-.opcion-personaje input[type="radio"] {
-    display: none;
-}
-
 .tarjeta-radio {
     display: flex;
     flex-direction: column;
