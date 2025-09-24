@@ -44,14 +44,11 @@ class Personaje {
 }
 
 // 🌍 Constantes universales (actualizadas)
-const PERSONAJES = [
+let PERSONAJES = [
     new Personaje("Zuko", "Fuego"),
     new Personaje("Katara", "Agua"),
     new Personaje("Aang", "Aire"),
     new Personaje("Toph", "Tierra")
-    // ¡Fácil agregar nuevos personajes!
-    // new Personaje("Sokka", "Agua"),
-    // new Personaje("Iroh", "Fuego"),
 ];
 
 const ATAQUES = ["Puño", "Patada", "Barrida"];
@@ -77,7 +74,15 @@ const elements = {
     seccionSeleccion: document.getElementById("selecionar-personaje"),
     seccionAtaque: document.getElementById("seleccionar-ataque"),
     seccionReiniciar: document.getElementById("reiniciar"),
-    contenedorPersonajes: document.getElementById("contenedor-personajes")
+    contenedorPersonajes: document.getElementById("contenedor-personajes"),
+    // Nuevos elementos para agregar personajes
+    botonAgregarPersonaje: document.getElementById("boton-agregar-personaje"),
+    modalAgregarPersonaje: document.getElementById("modal-agregar-personaje"),
+    formNuevoPersonaje: document.getElementById("form-nuevo-personaje"),
+    nombrePersonajeInput: document.getElementById("nombre-personaje"),
+    elementoPersonajeSelect: document.getElementById("elemento-personaje"),
+    cancelarAgregarBtn: document.getElementById("cancelar-agregar"),
+    cerrarModal: document.querySelector(".cerrar-modal")
 };
 
 // 📜 Función para alternar la visibilidad de las reglas
@@ -117,7 +122,7 @@ function ocultarSecciones() {
     elements.seccionReiniciar.style.display = "none";
 }
 
-// 🎯 Seleccionar personaje del jugador (MODIFICADA para trabajar con generación dinámica)
+// 🎯 Seleccionar personaje del jugador
 function seleccionarPersonajeJugador() {
     const personajeSeleccionado = PERSONAJES.find(personaje => {
         const radioButton = document.getElementById(personaje.nombre);
@@ -242,11 +247,94 @@ function mostrarMensaje(mensaje) {
     alert(mensaje);
 }
 
+// 👥 FUNCIONES PARA AGREGAR NUEVOS PERSONAJES
+
+// Función para generar los personajes dinámicamente
+function generarPersonajes() {
+    const contenedor = document.getElementById('contenedor-personajes');
+    contenedor.innerHTML = ''; // Limpiar contenedor antes de generar
+
+    PERSONAJES.forEach((personaje, index) => {
+        const divPersonaje = document.createElement('div');
+        divPersonaje.className = 'opcion-personaje';
+
+        divPersonaje.innerHTML = `
+            <input type="radio" name="personaje" id="${personaje.nombre}" />
+            <label for="${personaje.nombre}" class="fss">${personaje.nombre} ${personaje.emoji}</label>
+        `;
+
+        contenedor.appendChild(divPersonaje);
+    });
+}
+
+// Función para abrir el modal de agregar personaje
+function abrirModalAgregarPersonaje() {
+    elements.modalAgregarPersonaje.style.display = 'block';
+    elements.nombrePersonajeInput.focus();
+}
+
+// Función para cerrar el modal
+function cerrarModalAgregarPersonaje() {
+    elements.modalAgregarPersonaje.style.display = 'none';
+    elements.formNuevoPersonaje.reset();
+}
+
+// Función para agregar nuevo personaje
+function agregarNuevoPersonaje(event) {
+    event.preventDefault();
+    
+    const nombre = elements.nombrePersonajeInput.value.trim();
+    const elemento = elements.elementoPersonajeSelect.value;
+    
+    // Validaciones
+    if (!nombre) {
+        alert('Por favor ingresa un nombre para el personaje');
+        return;
+    }
+    
+    if (!elemento) {
+        alert('Por favor selecciona un elemento');
+        return;
+    }
+    
+    // Verificar si el personaje ya existe
+    if (PERSONAJES.some(p => p.nombre.toLowerCase() === nombre.toLowerCase())) {
+        alert('¡Ya existe un personaje con ese nombre!');
+        return;
+    }
+    
+    // Crear y agregar el nuevo personaje
+    const nuevoPersonaje = new Personaje(nombre, elemento);
+    PERSONAJES.push(nuevoPersonaje);
+    
+    // Regenerar la lista de personajes
+    generarPersonajes();
+    
+    // Cerrar modal y limpiar formulario
+    cerrarModalAgregarPersonaje();
+    
+    // Mostrar mensaje de éxito
+    mostrarMensaje(`¡Personaje "${nombre}" agregado exitosamente!`);
+}
+
 // 🎮 Inicialización de eventos
 function inicializarEventos() {
     ocultarSecciones();
     elements.botonSeleccionar.addEventListener("click", seleccionarPersonajeJugador);
     elements.botonReiniciar.addEventListener("click", reiniciarJuego);
+    
+    // Eventos para agregar personajes
+    elements.botonAgregarPersonaje.addEventListener("click", abrirModalAgregarPersonaje);
+    elements.cerrarModal.addEventListener("click", cerrarModalAgregarPersonaje);
+    elements.cancelarAgregarBtn.addEventListener("click", cerrarModalAgregarPersonaje);
+    elements.formNuevoPersonaje.addEventListener("submit", agregarNuevoPersonaje);
+    
+    // Cerrar modal al hacer clic fuera de él
+    window.addEventListener("click", (event) => {
+        if (event.target === elements.modalAgregarPersonaje) {
+            cerrarModalAgregarPersonaje();
+        }
+    });
 
     ATAQUES.forEach((ataque, index) => {
         elements.botonesAtaque[index].addEventListener("click", () => {
@@ -257,26 +345,8 @@ function inicializarEventos() {
     });
 }
 
-// Función para generar los personajes dinámicamente
-function generarPersonajes() {
-    const contenedor = document.getElementById('contenedor-personajes');
-
-    PERSONAJES.forEach((personaje, index) => {
-        const divPersonaje = document.createElement('div');
-        divPersonaje.className = 'opcion-personaje';
-
-        // QUITAR el display: none del input radio
-        divPersonaje.innerHTML = `
-            <label for="${personaje.nombre}" class="fss">${personaje.nombre} ${personaje.emoji}</label>
-            <input type="radio" name="personaje" id="${personaje.nombre}" />
-            `;
-
-        contenedor.appendChild(divPersonaje);
-    });
-}
-
 // 🛠️ Generar personajes al cargar la página
-document.addEventListener('DOMContentLoaded', generarPersonajes);
-
-// 🚀 Iniciar juego
-inicializarEventos();
+document.addEventListener('DOMContentLoaded', function() {
+    generarPersonajes();
+    inicializarEventos();
+});
