@@ -117,6 +117,14 @@ section:hover {
     color: var(--color-accent-gold);
 }
 
+#reglas.hidden {
+    display: none;
+}
+
+#toggleButton {
+    margin-bottom: 50px;
+}
+
 .contenedor-opciones {
     display: flex;
     justify-content: center;
@@ -222,7 +230,7 @@ section:hover {
 }
 
 /* Botones Principales - Sigilo y Poder */
-.boton-principal {
+#toggleButton, .boton-principal {
     background-color: var(--color-accent-gold); /* Oro místico */
     color: white;
     border: none;
@@ -242,7 +250,7 @@ section:hover {
     z-index: 1;
 }
 
-.boton-principal::before { /* Brillo al pasar el mouse */
+#toggleButton::before, .boton-principal::before { /* Brillo al pasar el mouse */
     content: '';
     position: absolute;
     top: 0;
@@ -254,18 +262,18 @@ section:hover {
     transition: transform 0.4s ease-out;
 }
 
-.boton-principal:hover::before {
+#toggleButton:hover::before, .boton-principal:hover::before {
     transform: translateX(100%) skewX(-30deg);
 }
 
-.boton-principal:hover {
+#toggleButton:hover, .boton-principal:hover {
     background-color: #d8a05c; /* Oro más claro al pasar el mouse */
     transform: translateY(-5px) scale(1.02);
     box-shadow: 0 12px 25px rgba(0,0,0,0.15),
                 0 0 20px var(--color-accent-gold); /* Brillo dorado */
 }
 
-.boton-principal:active {
+#toggleButton:active, .boton-principal:active {
     transform: translateY(1px) scale(0.98);
     box-shadow: 0 3px 8px rgba(0,0,0,0.15),
                 inset 0 3px 5px rgba(0,0,0,0.2);
