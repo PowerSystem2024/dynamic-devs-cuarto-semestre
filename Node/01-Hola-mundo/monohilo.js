@@ -10,4 +10,4 @@ setInterval(function() {
     //    var a = 3 + z; // <-- aquí da error porque "z" no está definida
     //}
 }, 1000);
-console.log("Segunda Instruccion");
+console.log("Ultima Instruccion");
