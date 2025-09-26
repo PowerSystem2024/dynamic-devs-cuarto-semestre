@@ -14,14 +14,33 @@ const gameState = {
 };
 
 // 🌍 Constantes
-let PERSONAJES = [
-    new Personaje("Zuko", "Fuego"),
-    new Personaje("Katara", "Agua"),
-    new Personaje("Aang", "Aire"),
-    new Personaje("Toph", "Tierra")
-];
+let PERSONAJES = [];
 
-const ATAQUES = ["Puño", "Patada", "Barrida"];
+// Inicializar personajes con sus ataques
+function inicializarPersonajes() {
+    const zuko = new Personaje("Zuko", "Fuego");
+    zuko.agregarAtaque("Puño", "btn-punio");
+    zuko.agregarAtaque("Patada", "btn-patada");
+    zuko.agregarAtaque("Barrida", "btn-barrida");
+
+    const katara = new Personaje("Katara", "Agua");
+    katara.agregarAtaque("Puño", "btn-punio");
+    katara.agregarAtaque("Patada", "btn-patada");
+    katara.agregarAtaque("Barrida", "btn-barrida");
+
+    const aang = new Personaje("Aang", "Aire");
+    aang.agregarAtaque("Puño", "btn-punio");
+    aang.agregarAtaque("Patada", "btn-patada");
+    aang.agregarAtaque("Barrida", "btn-barrida");
+
+    const toph = new Personaje("Toph", "Tierra");
+    toph.agregarAtaque("Puño", "btn-punio");
+    toph.agregarAtaque("Patada", "btn-patada");
+    toph.agregarAtaque("Barrida", "btn-barrida");
+
+    PERSONAJES = [zuko, katara, aang, toph];
+}
+
 const EMOJIS = {
     "Puño": "👊🏼",
     "Patada": "🦶🏼",
@@ -125,7 +144,9 @@ function seleccionarPersonajePC() {
 
 // 🎲 Ataque aleatorio para la PC
 function ataqueAleatorioPC() {
-    return ATAQUES[Math.floor(Math.random() * ATAQUES.length)];
+    const ataquesPC = gameState.personajePC.obtenerAtaques();
+    const ataqueAleatorio = ataquesPC[Math.floor(Math.random() * ataquesPC.length)];
+    return ataqueAleatorio.nombre;
 }
 
 // ⚔️ Lógica del combate
@@ -224,9 +245,42 @@ function inicializarEventos() {
         modalPersonajes.abrir();
     });
 
-    ATAQUES.forEach((ataque, index) => {
-        elements.botonesAtaque[index].addEventListener("click", () => {
-            gameState.ataqueJugador = ataque;
+    // Configurar eventos de ataque para cada personaje
+    configurarEventosAtaque();
+}
+
+// 🔧 Configurar eventos de ataque dinámicamente
+function configurarEventosAtaque() {
+    // Limpiar eventos anteriores
+    elements.botonesAtaque.forEach(boton => {
+        boton.replaceWith(boton.cloneNode(true));
+    });
+
+    // Reasignar referencias después del clonado
+    elements.botonesAtaque = [
+        document.getElementById("btn-punio"),
+        document.getElementById("btn-patada"),
+        document.getElementById("btn-barrida")
+    ];
+
+    // Asignar eventos a cada botón de ataque
+    elements.botonesAtaque.forEach(boton => {
+        boton.addEventListener("click", () => {
+            // Obtener el nombre del ataque basado en el ID del botón
+            let ataqueNombre = "";
+            switch(boton.id) {
+                case "btn-punio":
+                    ataqueNombre = "Puño";
+                    break;
+                case "btn-patada":
+                    ataqueNombre = "Patada";
+                    break;
+                case "btn-barrida":
+                    ataqueNombre = "Barrida";
+                    break;
+            }
+            
+            gameState.ataqueJugador = ataqueNombre;
             gameState.ataquePC = ataqueAleatorioPC();
             combate(gameState.ataqueJugador, gameState.ataquePC);
         });
@@ -235,13 +289,16 @@ function inicializarEventos() {
 
 // 🛠️ Inicializar la aplicación
 document.addEventListener('DOMContentLoaded', function() {
-    // Inicializar módulos (PASAR Personaje como parámetro)
+    // Inicializar personajes con sus ataques
+    inicializarPersonajes();
+    
+    // Inicializar módulos
     generadorPersonajes = new GeneradorPersonajes(PERSONAJES);
     modalPersonajes = new ModalPersonajes(
         PERSONAJES,
         () => generadorPersonajes.generar(),
         mostrarMensaje,
-        Personaje // ← Aquí pasamos la clase Personaje
+        Personaje
     );
     
     // Generar personajes y eventos

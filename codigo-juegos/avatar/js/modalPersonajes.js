@@ -4,7 +4,7 @@ export class ModalPersonajes {
         this.PERSONAJES = personajesArray;
         this.generarPersonajes = generarPersonajesCallback;
         this.mostrarMensaje = mostrarMensajeCallback;
-        this.Personaje = PersonajeClass; // Recibir la clase como parámetro
+        this.Personaje = PersonajeClass;
         
         // Elementos del modal
         this.elements = {
@@ -54,8 +54,14 @@ export class ModalPersonajes {
             return;
         }
         
-        // Crear y agregar el nuevo personaje (SIN await)
+        // Crear y agregar el nuevo personaje con sus ataques
         const nuevoPersonaje = new this.Personaje(nombre, elemento);
+        
+        // Agregar ataques básicos al nuevo personaje
+        nuevoPersonaje.agregarAtaque("Puño", "btn-punio");
+        nuevoPersonaje.agregarAtaque("Patada", "btn-patada");
+        nuevoPersonaje.agregarAtaque("Barrida", "btn-barrida");
+        
         this.PERSONAJES.push(nuevoPersonaje);
         
         // Actualizar interfaz
