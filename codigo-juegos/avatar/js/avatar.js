@@ -1,3 +1,8 @@
+// 📦 Importar módulos
+import { Personaje } from './Personaje.js';
+import { ModalPersonajes } from './modalPersonajes.js';
+import { GeneradorPersonajes } from './generadorPersonajes.js';
+
 // 🎮 Estado global del juego
 const gameState = {
     ataqueJugador: "",
@@ -8,42 +13,7 @@ const gameState = {
     vidasPC: 3
 };
 
-// 👤 Clase Personaje
-class Personaje {
-    constructor(nombre, elemento, vidas = 3) {
-        this.nombre = nombre;
-        this.elemento = elemento;
-        this.vidas = vidas;
-        this.emoji = this.obtenerEmojiElemento();
-    }
-
-    obtenerEmojiElemento() {
-        const emojis = {
-            "Fuego": "🔥",
-            "Agua": "💧",
-            "Aire": "💨",
-            "Tierra": "🌱"
-        };
-        return emojis[this.elemento] || "❓";
-    }
-
-    obtenerNombreCompleto() {
-        return `${this.nombre} ${this.emoji}`;
-    }
-
-    perderVida() {
-        if (this.vidas > 0) {
-            this.vidas--;
-        }
-        return this.vidas;
-    }
-
-    reiniciarVidas() {
-        this.vidas = 3;
-    }
-}
-
-// 🌍 Constantes universales (actualizadas)
+// 🌍 Constantes
 let PERSONAJES = [
     new Personaje("Zuko", "Fuego"),
     new Personaje("Katara", "Agua"),
@@ -58,7 +28,7 @@ const EMOJIS = {
     "Barrida": "👣"
 };
 
-// 📌 Selectores globales (actualizados)
+// 📌 Selectores globales
 const elements = {
     personajeJugador: document.getElementById("personaje-jugador"),
     personajePC: document.getElementById("personaje-pc"),
@@ -74,16 +44,24 @@ const elements = {
     seccionSeleccion: document.getElementById("selecionar-personaje"),
     seccionAtaque: document.getElementById("seleccionar-ataque"),
     seccionReiniciar: document.getElementById("reiniciar"),
-    contenedorPersonajes: document.getElementById("contenedor-personajes"),
-    // Nuevos elementos para agregar personajes
-    botonAgregarPersonaje: document.getElementById("boton-agregar-personaje"),
-    modalAgregarPersonaje: document.getElementById("modal-agregar-personaje"),
-    formNuevoPersonaje: document.getElementById("form-nuevo-personaje"),
-    nombrePersonajeInput: document.getElementById("nombre-personaje"),
-    elementoPersonajeSelect: document.getElementById("elemento-personaje"),
-    cancelarAgregarBtn: document.getElementById("cancelar-agregar"),
-    cerrarModal: document.querySelector(".cerrar-modal")
+    botonAgregarPersonaje: document.getElementById("boton-agregar-personaje")
 };
+
+// 🏗️ Instanciar módulos
+let generadorPersonajes;
+let modalPersonajes;
+
+// 💬 Mostrar mensajes
+function mostrarMensaje(mensaje) {
+    alert(mensaje);
+}
+
+// 🔥 Ocultar todas las secciones excepto selección al inicio
+function ocultarSecciones() {
+    elements.seccionSeleccion.style.display = "block";
+    elements.seccionAtaque.style.display = "none";
+    elements.seccionReiniciar.style.display = "none";
+}
 
 // 📜 Función para alternar la visibilidad de las reglas
 document.addEventListener('DOMContentLoaded', function () {
@@ -114,13 +92,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     toggleButton.addEventListener('click', toggleReglas);
 });
-
-// 🔥 Ocultar todas las secciones excepto selección al inicio
-function ocultarSecciones() {
-    elements.seccionSeleccion.style.display = "block";
-    elements.seccionAtaque.style.display = "none";
-    elements.seccionReiniciar.style.display = "none";
-}
 
 // 🎯 Seleccionar personaje del jugador
 function seleccionarPersonajeJugador() {
@@ -242,98 +213,15 @@ function reiniciarJuego() {
     mostrarMensaje("Juego reiniciado. ¡Selecciona un personaje!");
 }
 
-// 💬 Mostrar mensajes
-function mostrarMensaje(mensaje) {
-    alert(mensaje);
-}
-
-// 👥 FUNCIONES PARA AGREGAR NUEVOS PERSONAJES
-
-// Función para generar los personajes dinámicamente
-function generarPersonajes() {
-    const contenedor = document.getElementById('contenedor-personajes');
-    contenedor.innerHTML = ''; // Limpiar contenedor antes de generar
-
-    PERSONAJES.forEach((personaje, index) => {
-        const divPersonaje = document.createElement('div');
-        divPersonaje.className = 'opcion-personaje';
-
-        divPersonaje.innerHTML = `
-            <input type="radio" name="personaje" id="${personaje.nombre}" />
-            <label for="${personaje.nombre}" class="fss">${personaje.nombre} ${personaje.emoji}</label>
-        `;
-
-        contenedor.appendChild(divPersonaje);
-    });
-}
-
-// Función para abrir el modal de agregar personaje
-function abrirModalAgregarPersonaje() {
-    elements.modalAgregarPersonaje.style.display = 'block';
-    elements.nombrePersonajeInput.focus();
-}
-
-// Función para cerrar el modal
-function cerrarModalAgregarPersonaje() {
-    elements.modalAgregarPersonaje.style.display = 'none';
-    elements.formNuevoPersonaje.reset();
-}
-
-// Función para agregar nuevo personaje
-function agregarNuevoPersonaje(event) {
-    event.preventDefault();
-    
-    const nombre = elements.nombrePersonajeInput.value.trim();
-    const elemento = elements.elementoPersonajeSelect.value;
-    
-    // Validaciones
-    if (!nombre) {
-        alert('Por favor ingresa un nombre para el personaje');
-        return;
-    }
-    
-    if (!elemento) {
-        alert('Por favor selecciona un elemento');
-        return;
-    }
-    
-    // Verificar si el personaje ya existe
-    if (PERSONAJES.some(p => p.nombre.toLowerCase() === nombre.toLowerCase())) {
-        alert('¡Ya existe un personaje con ese nombre!');
-        return;
-    }
-    
-    // Crear y agregar el nuevo personaje
-    const nuevoPersonaje = new Personaje(nombre, elemento);
-    PERSONAJES.push(nuevoPersonaje);
-    
-    // Regenerar la lista de personajes
-    generarPersonajes();
-    
-    // Cerrar modal y limpiar formulario
-    cerrarModalAgregarPersonaje();
-    
-    // Mostrar mensaje de éxito
-    mostrarMensaje(`¡Personaje "${nombre}" agregado exitosamente!`);
-}
-
 // 🎮 Inicialización de eventos
 function inicializarEventos() {
     ocultarSecciones();
     elements.botonSeleccionar.addEventListener("click", seleccionarPersonajeJugador);
     elements.botonReiniciar.addEventListener("click", reiniciarJuego);
-    
-    // Eventos para agregar personajes
-    elements.botonAgregarPersonaje.addEventListener("click", abrirModalAgregarPersonaje);
-    elements.cerrarModal.addEventListener("click", cerrarModalAgregarPersonaje);
-    elements.cancelarAgregarBtn.addEventListener("click", cerrarModalAgregarPersonaje);
-    elements.formNuevoPersonaje.addEventListener("submit", agregarNuevoPersonaje);
-    
-    // Cerrar modal al hacer clic fuera de él
-    window.addEventListener("click", (event) => {
-        if (event.target === elements.modalAgregarPersonaje) {
-            cerrarModalAgregarPersonaje();
-        }
+
+    // Evento para abrir modal
+    elements.botonAgregarPersonaje.addEventListener("click", () => {
+        modalPersonajes.abrir();
     });
 
     ATAQUES.forEach((ataque, index) => {
@@ -345,8 +233,18 @@ function inicializarEventos() {
     });
 }
 
-// 🛠️ Generar personajes al cargar la página
+// 🛠️ Inicializar la aplicación
 document.addEventListener('DOMContentLoaded', function() {
-    generarPersonajes();
+    // Inicializar módulos (PASAR Personaje como parámetro)
+    generadorPersonajes = new GeneradorPersonajes(PERSONAJES);
+    modalPersonajes = new ModalPersonajes(
+        PERSONAJES,
+        () => generadorPersonajes.generar(),
+        mostrarMensaje,
+        Personaje // ← Aquí pasamos la clase Personaje
+    );
+    
+    // Generar personajes y eventos
+    generadorPersonajes.generar();
     inicializarEventos();
 });
