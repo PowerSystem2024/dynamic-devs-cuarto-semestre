@@ -8,12 +8,15 @@ import utn.tienda_libros.servicio.LibroServicio;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 @Component
 public class LibroFrom extends JFrame {
     LibroServicio libroServicio;
     private JPanel panel;
     private JTable tablaLibros;
+    private JTextField idTexto;
     private JTextField libroTexto;
     private JTextField autorTexto;
     private JTextField precioTexto;
@@ -29,6 +32,17 @@ public class LibroFrom extends JFrame {
         iniciarForma();
 
         agregarButton.addActionListener(e -> agregarLibro());
+
+        tablaLibros.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                cargarLibroSeleccionado();
+            }
+        });
+
+        modificarButton.addActionListener(e -> modificarLibro());
+        eliminarButton.addActionListener(e -> eliminarLibro());
     }
 
     private void iniciarForma() {
@@ -46,7 +60,7 @@ public class LibroFrom extends JFrame {
 
     private void agregarLibro() {
         //Leer lo valores del formulario
-        if(libroTexto.getText().equals("")) {
+        if (libroTexto.getText().equals("")) {
             mostrarMensaje("Ingresa el nombre del libro");
             libroTexto.requestFocusInWindow();
             return;
@@ -55,6 +69,14 @@ public class LibroFrom extends JFrame {
         var autor = autorTexto.getText();
         var precio = Double.parseDouble(precioTexto.getText());
         var existencias = Integer.parseInt(existenciasTexto.getText());
+
+        // Validar si el libro ya existe
+        if (libroYaExiste(nombreLibro, autor)) {
+            mostrarMensaje("Este libro ya existe en la base de datos");
+            libroTexto.requestFocusInWindow();
+            return;
+        }
+
         //Creamos el objeto libro
         var libro = new Libro(null, nombreLibro, autor, precio, existencias);
         //libro.setNombreLibro(nombreLibro);
@@ -66,6 +88,72 @@ public class LibroFrom extends JFrame {
         limpiarFormulario();
         listarLibros();
 
+    }
+
+    // Metodo para verificar si el libro ya existe
+    private boolean libroYaExiste(String nombreLibro, String autor) {
+        var libros = libroServicio.listarLibros();
+        return libros.stream()
+                .anyMatch(libro ->
+                        libro.getNombreLibro().equalsIgnoreCase(nombreLibro) &&
+                                libro.getAutor().equalsIgnoreCase(autor)
+                );
+    }
+
+    private void cargarLibroSeleccionado() {
+        // los indices de la columna inician en cero
+        var reglon = tablaLibros.getSelectedRow();
+        if (reglon != -1) {
+            String idLibro = tablaLibros.getModel().getValueAt(reglon, 0).toString();
+            idTexto.setText(idLibro);
+            String nombreLibro = tablaLibros.getModel().getValueAt(reglon, 1).toString();
+            libroTexto.setText(nombreLibro);
+            String autorLibro = tablaLibros.getModel().getValueAt(reglon, 2).toString();
+            autorTexto.setText(autorLibro);
+            String precio = tablaLibros.getModel().getValueAt(reglon, 3).toString();
+            precioTexto.setText(precio);
+            String existencias = tablaLibros.getModel().getValueAt(reglon, 4).toString();
+            existenciasTexto.setText(existencias);
+        }
+    }
+
+    private void modificarLibro() {
+        if (this.idTexto.getText().equals("")) {
+            mostrarMensaje("Debes seleccionar un registro en la tabla");
+        } else {
+            // verificamos que el nombre del libro no sea nulo
+            if (this.libroTexto.getText().equals("")) {
+                mostrarMensaje("Ingrese el nombre del libro...");
+                libroTexto.requestFocusInWindow();
+                return;
+            }
+            // lenamos el objeto libro a actualizar
+            int idLibro = Integer.parseInt(this.idTexto.getText());
+            var nombreLibro = libroTexto.getText();
+            var autorLibro = autorTexto.getText();
+            var precio = Double.parseDouble(precioTexto.getText());
+            var existencias = Integer.parseInt(existenciasTexto.getText());
+            var libro = new Libro(idLibro, nombreLibro, autorLibro, precio, existencias);
+            libroServicio.guardarLibro(libro);
+            mostrarMensaje("Libro modificado...");
+            limpiarFormulario();
+            listarLibros();
+        }
+    }
+
+    private void eliminarLibro() {
+        var reglon = tablaLibros.getSelectedRow();
+        if (reglon != -1) {
+            String idLibro = tablaLibros.getModel().getValueAt(reglon, 0).toString();
+            var libro = new Libro();
+            libro.setIdLibro(Integer.parseInt(idLibro));
+            libroServicio.eliminarLibro(libro);
+            mostrarMensaje("Libro " + idLibro + " ELIMINADO");
+            limpiarFormulario();
+            listarLibros();
+        } else {
+            mostrarMensaje("No se ha seleccionado ningún libro de la tabla a eliminar.");
+        }
     }
 
     private void limpiarFormulario() {
@@ -80,11 +168,19 @@ public class LibroFrom extends JFrame {
     }
 
     private void createUIComponents() {
-        this.tablaModeloLibros = new DefaultTableModel(0,5);
-        String[] cabecera = {"Id","Libro","Autor","Precio","Existencias"};
+        idTexto = new JTextField("");
+        idTexto.setVisible(false);
+        this.tablaModeloLibros = new DefaultTableModel(0, 5) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        String[] cabecera = {"Id", "Libro", "Autor", "Precio", "Existencias"};
         this.tablaModeloLibros.setColumnIdentifiers(cabecera);
         //Instanciar el objeto de JTable
         this.tablaLibros = new JTable(tablaModeloLibros);
+        tablaLibros.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         listarLibros();
     }
 
@@ -94,9 +190,9 @@ public class LibroFrom extends JFrame {
         //Obtener los libros de la BD
         var libros = libroServicio.listarLibros();
         //Iteramos cada libro
-        libros.forEach((libro)-> {
+        libros.forEach((libro) -> {
             //Creamos cada registro para agregarlos a la tabla
-            Object [] renglonLibro = {
+            Object[] renglonLibro = {
                     libro.getIdLibro(),
                     libro.getNombreLibro(),
                     libro.getAutor(),
