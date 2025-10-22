@@ -8,8 +8,6 @@ import utn.tienda_libros.servicio.LibroServicio;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -172,11 +170,17 @@ public class LibroFrom extends JFrame {
     private void createUIComponents() {
         idTexto = new JTextField("");
         idTexto.setVisible(false);
-        this.tablaModeloLibros = new DefaultTableModel(0, 5);
+        this.tablaModeloLibros = new DefaultTableModel(0, 5) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
         String[] cabecera = {"Id", "Libro", "Autor", "Precio", "Existencias"};
         this.tablaModeloLibros.setColumnIdentifiers(cabecera);
         //Instanciar el objeto de JTable
         this.tablaLibros = new JTable(tablaModeloLibros);
+        tablaLibros.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         listarLibros();
     }
 
