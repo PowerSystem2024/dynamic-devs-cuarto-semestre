@@ -20,6 +20,8 @@ function App() {
             <Route path="/tareas" element={<TareasPage />} />
             <Route path="/tareas/crear" element={<TareasFormPage />} />
             <Route path="/tareas/editar/:id" element={<TareasFormPage />} />
+
+            <Route path="*" element={<NotFound />} />
         </Routes>
     )
 }
