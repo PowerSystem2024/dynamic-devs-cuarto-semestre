@@ -1,4 +1,5 @@
 import { createContext, useContext, useState } from "react";
+import axios from "axios";
 
 export const AuthContext = createContext();
 
@@ -15,7 +16,26 @@ export function AuthProvider({ children }) {
   const [isAuth, setIsAuth] = useState(false);
   const [errors, setErrors] = useState(null);
 
-  
+  const signin = async (data) => {
+    const response = await axios.post("http://localhost:3000/api/signin", data, {
+      withCredentials: true
+    });
+    console.log(response);
+    setUser(response.data);
+  }
 
-  return <AuthContext.Provider value={{ user, isAuth, errors }}>{children}</AuthContext.Provider>;
+  const signup = async (data) => {
+      // Lógica para registrar al usuario
+      const response = await axios.post("http://localhost:3000/api/signup", data, {
+        withCredentials: true
+      });
+      console.log(response.data);
+      setUser(response.data.user);
+  };
+
+  return (
+    <AuthContext.Provider value={{ user, isAuth, errors, signup, setUser, signin, }}>
+      {children}
+    </AuthContext.Provider>
+  );
 }
