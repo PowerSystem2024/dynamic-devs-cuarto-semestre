@@ -1,15 +1,12 @@
-import { useEffect, useState } from 'react'
-import { obtenerTareasRequest } from '../api/tareas.api';
+import { useEffect } from 'react'
 import { CardTareas } from '../components/tareas/CardTareas';
-import { Card } from '../components/ui/Card';
+import { useTareas } from '../context/TareasContext';
 
 function TareasPage() {
-  const [tareas, setTareas] = useState([]);
+  const { tareas, listarTareas } = useTareas();
 
   useEffect(() => {
-    obtenerTareasRequest().then(response => {
-      setTareas(response.data);
-    });
+    listarTareas();
   }, [])
 
   return (
