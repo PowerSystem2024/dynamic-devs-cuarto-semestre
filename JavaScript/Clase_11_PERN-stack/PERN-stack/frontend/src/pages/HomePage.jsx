@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { AuthContext } from '../context/AuthContext.jsx';
-import Card from '../components/Card.jsx';
+import Card from '../components/ui/Card.jsx';
 
 function HomePage() {
   const data = useContext(AuthContext);
