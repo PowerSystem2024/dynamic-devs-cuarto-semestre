@@ -13,13 +13,10 @@ import { useAuth } from './context/AuthContext'
 import { TareaProvider } from './context/TareasContext';
 
 function App() {
-
     const { isAuth, loading } = useAuth();
 
     if (loading) {
-        setTimeout(() => {
-            return <h1>Cargando...</h1>
-        }, 1000);
+        return <h1>Cargando...</h1>
     }
 
     return (<>
