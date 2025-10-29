@@ -2,10 +2,10 @@
   "name": "pern-stack",
   "version": "1.0.0",
   "type": "module",
-  "main": "backend/index.js",
+  "main": "./backend/src/index.js",
   "scripts": {
-    "dev": "nodemon backend/index.js",
-    "start": "node backend/index.js"
+    "dev": "nodemon ./backend/src/index.js",
+    "start": "node ./backend/src/index.js"
   },
   "keywords": [],
   "author": "DynamicDevs",
