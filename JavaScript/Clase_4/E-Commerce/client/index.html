@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Mi E-Commerce</title>
+
+    <link rel="stylesheet" href="styles.css" />
+
+    <!-- SDK Mercado Pago v2 -->
+    <script src="https://sdk.mercadopago.com/js/v2"></script>
+
+    <script>
+      // Public Key de PRUEBAS
+      window.MP_PUBLIC_KEY = "Public_Key_de_Pruebas"; // Colocar la Public Key de pruebas
+    </script>
+  </head>
+
+  <body>
+    <!-- Contenido de la tienda -->
+    <div class="card-products-container">
+      <div class="card-products" id="shopContent"></div>
+    </div>
+
+    <!-- Botón carrito -->
+    <div class="cart-btn" id="cart-btn">🛒</div>
+
+    <!-- Contador carrito -->
+    <span class="cart-counter" id="cart-counter">0</span>
+
+    <!-- Overlay y modal -->
+    <div class="modal-overlay" id="modal-overlay"></div>
+    <div class="modal-container" id="modal-container">
+      <!-- Aquí se renderiza el contenido del carrito desde JS -->
+
+      <!-- Botón de pago (pruebas) -->
+      <div class="checkout-actions" style="margin-top: 16px;">
+        <button id="mp-pay" class="btn-primary">
+          Pagar con Mercado Pago (prueba)
+        </button>
+        <!-- Contenedor opcional si luego quieres usar Bricks -->
+        <div id="mp-container" style="margin-top: 8px;"></div>
+      </div>
+    </div>
+
+    <!-- Scripts de tu app -->
+    <script src="js/products.js"></script>
+    <script src="js/index.js"></script>
+    <script src="js/cart.js"></script>
+  </body>
+</html>
