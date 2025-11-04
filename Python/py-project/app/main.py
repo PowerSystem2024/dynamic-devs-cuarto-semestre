@@ -30,9 +30,11 @@ def run():
 
     if len(result) > 0:
         country = result[0]
+        print(country)  #muestra el diccionario completo
         labels, values = utils.get_population(country)
         charts.generate_bar_chart(country['Country'], labels, values)
-
+    else:
+        print('No se encontró el país solicitado.')
 
 if __name__ == '__main__':
     run()
