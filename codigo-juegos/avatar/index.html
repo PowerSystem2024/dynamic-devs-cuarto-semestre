@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta author="Dynamic Devs">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Juego de Avatar: La leyenda de Aang">
+    <meta name="keywords" content="Avatar, Aang, Katara, Zuko, Toph, Juego, HTML, CSS, JavaScript">
+    <title>LA LEYENDA DE AANG: AVATAR</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&family=Zen+Dots&family=Nunito:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="./css/style.css">
+    <style>
+        /* 🔥 Ocultamos secciones por defecto */
+        #seleccionar-ataque,
+        #reiniciar {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>AVATAR 🔥 💧 🌱 💨 </h1>
+
+    <section id="reglas">
+        <h2>Reglas del Juego</h2>
+        <p class="fsr">Elige un personaje y un ataque para enfrentarte a los enemigos.</br>
+            Cada personaje tiene 3 vidas. Elige sabiamente tus ataques.</br>
+            Gana el combate reduciendo las vidas del enemigo a 0.</br>
+            Si pierdes, puedes reiniciar el juego.</br>
+            Cada ataque tiene un efecto diferente:</br>
+            <strong>Puño 👊🏼:</strong> Le gana a <i>Barrida 👣</i></br>
+            <strong>Patada 🦶🏼:</strong> Le gana a <i>Puño 👊🏼</i></br>
+            <strong>Barrida 👣:</strong> Le gana a <i>Patada 🦶🏼</i></br>
+            ¡Diviértete y demuestra tu habilidad como Avatar!
+        </p>
+    </section>
+
+    <div class="contenedor-boton">
+        <button id="toggleButton">Ocultar Reglas</button>
+    </div>
+
+    <section id="selecionar-personaje">
+        <h2>Selecciona tu personaje</h2>
+
+        <div class="contenedor-personajes" id="contenedor-personajes">
+            <!-- Los personajes se generarán automáticamente aquí -->
+        </div>
+
+        <button class="boton-principal" id="boton-personaje" style="margin-top: 15px;">Seleccionar</button>
+        <button class="boton-agregar-personaje boton-principal" id="boton-agregar-personaje">➕ Agregar Nuevo
+            Personaje</button>
+    </section>
+
+    <!-- Modal para agregar nuevo personaje -->
+    <div id="modal-agregar-personaje" class="modal">
+        <div class="modal-contenido">
+            <span class="cerrar-modal">&times;</span>
+            <h2>AGREGAR<br>NUEVO<br>PERSONAJE</h2>
+            <form id="form-nuevo-personaje">
+                <div class="form-group">
+                    <label for="nombre-personaje">Nombre del Personaje:</label>
+                    <input type="text" id="nombre-personaje" required maxlength="20" placeholder=" ">
+                </div>
+                <div class="form-group">
+                    <label for="elemento-personaje">Elemento:</label>
+                    <select id="elemento-personaje" required>
+                        <option value="">Selecciona un elemento</option>
+                        <option value="Fuego">Fuego 🔥</option>
+                        <option value="Agua">Agua 💧</option>
+                        <option value="Aire">Aire 💨</option>
+                        <option value="Tierra">Tierra 🌱</option>
+                    </select>
+                </div>
+                <div class="botones-form">
+                    <button type="button" id="cancelar-agregar" class="boton-principal">CANCELAR</button>
+                    <button type="submit" class="boton-principal">AGREGAR<br>PERSONAJE</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <section id="seleccionar-ataque">
+        <h2>Elige tu ataque</h2>
+        <p class="fsr">Tu personaje (<span id="personaje-jugador"></span>) tiene <span>3</span> vidas</p>
+        <p class="fsr">El enemigo (<span id="personaje-pc"></span>) tiene <span>3</span> vidas</p>
+
+        <p class="margen">
+            <button class="boton-fuego boton-border fsr" id="btn-punio">Puño 👊🏼</button>
+            <button class="boton-agua boton-border fsr" id="btn-patada">Patada 🦶🏼</button>
+            <button class="boton-tierra boton-border fsr" id="btn-barrida">Barrida 👣</button>
+        </p>
+        <p id="resultado-combate" style="font-weight: bold; font-size: 1.2rem; color: #ffffff;"></p>
+    </section>
+
+    <section id="reiniciar">
+        <button class="boton-reiniciar boton-principal" id="boton-reiniciar">Reiniciar</button>
+    </section>
+
+    <script type="module" src="./js/avatar.js"></script>
+</body>
+
+</html>
