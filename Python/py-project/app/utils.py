@@ -15,5 +15,18 @@ def get_population(country_dict):
 
 
 def population_by_country(data, country):
-    result = list(filter(lambda item: item['Country'] == country, data))
+    # Normalizamos el nombre del país ingresado
+    normalized_input = country.strip().lower().replace('\n', '')
+
+    result = []
+    for item in data:
+        country_name = str(item['Country']).strip().lower().replace('\n', '')
+        if country_name == normalized_input:
+            result.append(item)
+
+    if not result:
+        print(f"[DEBUG] No se encontró '{normalized_input}' en el archivo CSV.")
+        print(f"[DEBUG] Algunos países del CSV son: {[d['Country'] for d in data[:10]]}")
+
     return result
+
