@@ -8,8 +8,8 @@
 main {
   background-image: linear-gradient(
     109.6deg,
-    rgba(62, 161, 219, 1) 11.2%,
-    rgba(93, 52, 236, 1) 100.2%
+    rgb(243, 173, 237) 11.2%,
+    rgb(236, 92, 212) 100.2%
   );
   width: 100vw;
   height: 100vh;
@@ -73,8 +73,8 @@ form {
   padding: 10px 15px;
   background-image: linear-gradient(
     109.6deg,
-    rgba(62, 161, 219, 1) 11.2%,
-    rgba(93, 52, 236, 1) 100.2%
+    rgb(206, 62, 219) 11.2%,
+    rgb(165, 36, 154) 100.2%
   );
   border: none;
   color: #fff;
@@ -114,11 +114,11 @@ form {
 }
 
 .icon:hover {
-  color: rgba(62, 161, 219, 1);
+  color: rgb(181, 96, 238);
 }
 
 .completeIcon {
-  color: rgba(62, 161, 219, 1);
+  color: rgb(181, 96, 238);
 }
 
 .trashIcon:hover {
@@ -147,7 +147,6 @@ form {
   padding: 15px;
 }
 
-/*Agregamos las Media Querrys para que todo sea responsive*/
 
 @media screen and (max-width: 1424px) {
   .mainCard {
